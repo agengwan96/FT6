@@ -10,8 +10,64 @@ html {
   scroll-behavior: smooth;
 }
 
+.container{
+  padding: 50px 0;
+}
+
+.row {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
 a {
   text-decoration: none;
   position: relative;
   transition: opacity 300ms ease;
+}
+
+.red{
+  color: red;
+}
+
+.header__title{
+  background-color: black;
+  height: 50px;
+}
+
+.title{
+  padding: 10px 0;
+  text-align: center;
+}
+
+.world{
+  color: white;
+}
+
+.welcome{
+  text-align: center;
+  padding-top: 30px;
+  font-size: 50pt;
+}
+
+.muworld{
+  text-align: center;
+  font-size: 55pt;
+}
+
+h2{
+  text-align: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 400px;
+}
+
+footer{
+  background-color: black;
+  height: 30px;
 }
