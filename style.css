@@ -10,16 +10,22 @@ html {
   scroll-behavior: smooth;
 }
 
-.container{
-  padding: 50px 0;
+.row{
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.row {
+.container{
+  padding: 20px 20px;
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 12px;
 }
+
+
 
 a {
   text-decoration: none;
@@ -58,6 +64,7 @@ a {
 
 h2{
   text-align: center;
+  margin-bottom: 24px;
 }
 
 form{
@@ -67,7 +74,31 @@ form{
   width: 400px;
 }
 
+input{
+  margin-bottom: 16px;
+  padding: 4px 4px;
+}
+
+.login{
+  width: 100%;
+  max-width: 100px;
+  height: 32px;
+  background-color: red;
+  color: white;
+  font-weight: 1000;
+  margin: 0 auto;
+  border: none;
+  border-radius: 10%;
+}
+
 footer{
   background-color: black;
-  height: 30px;
+  height: 40px;
+  margin-top: 50px;
+}
+
+.footer__text{
+  color:white;
+  text-align: center;
+  padding: 8px 0;
 }

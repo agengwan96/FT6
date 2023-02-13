@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MuWorld</title>
     <script
       src="https://kit.fontawesome.com/c8e4d183c2.js"
@@ -11,43 +11,43 @@
     ></script>
     <script src="./app.js" defer></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
-</head>
-<body>
-    <section class="header__title"><h1 class="title red">MU<span class="world">WORLD</span></h1></section>
+  </head>
+  <body>
+    <section class="header__title">
+      <h1 class="title red">MU<span class="world">WORLD</span></h1>
+    </section>
     <section class="welcome__title">
-        <h1 class="welcome"><span class="red">W</span>elcome to</h1>
-        <h1 class="muworld"><span class="red">Mu</span>World</h1>
+      <h1 class="welcome"><span class="red">W</span>elcome to</h1>
+      <h1 class="muworld"><span class="red">Mu</span>World</h1>
     </section>
-    <section class="staff">
+    <div class="row">
+      <section class="staff">
         <div class="container">
-            <div class="row">
-                <h2>Staff Login</h2>
-                <form class="staff__login">
-                    <label>Username</label>
-                    <input type="text" name="username">
-                    <label>Password</label>
-                    <input type="password" name="password">
-                    <input type="submit" name="Login">
-                </form>
-            </div>
+          <h2>Staff Login</h2>
+          <form class="staff__login" method="post" action="staffLogin()">
+            <label for="username">Username</label>
+            <input type="text" name="username" />
+            <label for="password">Password</label>
+            <input type="password" name="password" />
+            <input class="login" type="submit" value="Login" />
+          </form>
         </div>
-    </section>
-    <section class="student">
+      </section>
+      <section class="student">
         <div class="container">
-            <div class="row">
-                <h2>Student Login</h2>
-                <form class="student__login">
-                    <label>Username</label>
-                    <input type="text" name="username">
-                    <label>Password</label>
-                    <input type="password" name="password">
-                    <input type="submit" name="Login">
-                </form>
-            </div>
+          <h2>Student Login</h2>
+          <form class="student__login" method="post" action="studentLogin()">
+            <label for="username">Username</label>
+            <input type="text" name="username" />
+            <label for="password">Password</label>
+            <input type="password" name="password" />
+            <input class="login" type="submit" value="Login" />
+          </form>
         </div>
-    </section>
+      </section>
+    </div>
     <footer>
-        
+        <p class="footer__text">MuWorld Copyright &#169; 2023</p>
     </footer>
-</body>
+  </body>
 </html>
