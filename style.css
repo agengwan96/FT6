@@ -10,22 +10,23 @@ html {
   scroll-behavior: smooth;
 }
 
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .row{
   display: flex;
-  justify-content: end;
+  justify-content: space-around;
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
 }
 
-.container{
-  padding: 20px 20px;
+.form__container{
   width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
 }
-
-
 
 a {
   text-decoration: none;
@@ -37,7 +38,7 @@ a {
   color: red;
 }
 
-.header__title{
+.header{
   background-color: black;
   height: 50px;
 }
@@ -47,8 +48,57 @@ a {
   text-align: center;
 }
 
+.sub__title{
+  text-align: center;
+  font-size: 40pt;
+}
+
 .world{
   color: white;
+}
+
+nav {
+  height: 50px;
+  display: flex;
+  margin-bottom: 24px;
+  background-color: black;
+}
+
+.nav__container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.nav__link--anchor,
+.menu__link {
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  margin: 0 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.nav__link--list {
+  display: flex;
+  align-items: center;
+}
+
+li {
+  list-style-type: none;
+}
+
+.logout{
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: black;
 }
 
 .welcome{
@@ -60,6 +110,7 @@ a {
 .muworld{
   text-align: center;
   font-size: 55pt;
+  margin-bottom: 24px;
 }
 
 h2{
@@ -70,7 +121,7 @@ h2{
 form{
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  justify-content: space-evenly;
   width: 400px;
 }
 
@@ -92,9 +143,10 @@ input{
 }
 
 footer{
+  bootom: 0;
   background-color: black;
   height: 40px;
-  margin-top: 50px;
+  margin-top:auto;
 }
 
 .footer__text{
