@@ -142,6 +142,62 @@ input{
   border-radius: 10%;
 }
 
+/*
+  Dashboard
+*/
+
+.dashboard--wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+}
+
+#dashboard{
+  width: 80%;
+}
+
+#user__search{
+  padding: 16px 0;
+  width: 20%;
+}
+
+.user__search--form{
+  flex-direction: row;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.user__search--title{
+  text-align: left;
+}
+
+.user__search--input{
+  width: 70%;
+  height: 30px;
+}
+
+.user__search--btn{
+  width: 30%;
+  height: 30px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 8%;
+}
+
+.user__search--results{
+  border-color: lightgray;
+  border-top: none;
+  border-bottom: none;
+  width: 400px;
+  height: 100vh;
+  
+}
+
+/*
+  Footer
+*/
+
 footer{
   bootom: 0;
   background-color: black;
