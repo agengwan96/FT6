@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MuWorld</title>
+    <title>MuWorld v1</title>
     <script
       src="https://kit.fontawesome.com/c8e4d183c2.js"
       crossorigin="anonymous"
     ></script>
-    <script src="./app.js" defer></script>
+    <script src="app.js" defer></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body>
@@ -24,24 +24,12 @@
       <section class="staff">
         <div class="form__container">
           <h2>Staff Login</h2>
-          <form class="staff__login" method="post" action="staffLogin()">
-            <label for="username">Username</label>
-            <input type="text" name="username" />
+          <form class="staff__login" method="post" action="staffLogin()" id="loginForm">
+            <label for="email">Email</label>
+            <input required type="text" name="email" id="emailTextField"/>
             <label for="password">Password</label>
-            <input type="password" name="password" />
-            <input class="login" type="submit" value="Login" />
-          </form>
-        </div>
-      </section>
-      <section class="student">
-        <div class="form__container">
-          <h2>Student Login</h2>
-          <form class="student__login" method="post" action="studentLogin()">
-            <label for="username">Username</label>
-            <input type="text" name="username" />
-            <label for="password">Password</label>
-            <input type="password" name="password" />
-            <input class="login" type="submit" value="Login" />
+            <input required type="password" name="password" id="passwordTextField"/>
+            <input class="login" type="submit" value="Login"/>
           </form>
         </div>
       </section>
