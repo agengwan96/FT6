@@ -35,6 +35,40 @@
           </li>
         </ul>
         <button class="logout">LogOut</button>
+        <button onclick="openMenu()" class="btn__menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu__backdrop">
+          <button onclick="closeMenu()" class="btn__menu btn__menu--close">
+            <i class="fas fa-times"></i>
+          </button>
+          <ul class="menu__links">
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="#languages"
+                >Heatmap</a
+              >
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="#projects"
+                >Ind. Interaction</a
+              >
+            </li>
+            <li class="menu__list">
+              <a class="menu__link" href="mailto: agengwan@icloud.com"
+                >Org. Interaction</a
+              >
+            </li>
+            <li class="menu__list">
+              <a class="menu__link" href="mailto: agengwan@icloud.com"
+                >MOU</a
+              >
+            </li><li class="menu__list">
+              <a class="menu__link" href="mailto: agengwan@icloud.com"
+                >LogOut</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
     <div class="dashboard--wrapper">
@@ -47,7 +81,9 @@
         <input class="user__search--input" value="Search by User">
         <button class="user__search--btn">Search</button>
       </form>
-      <fieldset class="user__search--results"></fieldset>
+      <fieldset class="user__search--results">
+        
+      </fieldset>
     </section>
     </div>
     <footer>
