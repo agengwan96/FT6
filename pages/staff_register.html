@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MuWorld v1</title>
+    <script
+      src="https://kit.fontawesome.com/c8e4d183c2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/scripts/firebase_emailAuth.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+  <body>
+    <section class="header">
+      <h1 class="title red">MU<span class="world">WORLD</span></h1>
+    </section>
+    <section class="welcome__title">
+      <h1 class="welcome"><span class="red">W</span>elcome to</h1>
+      <h1 class="muworld"><span class="red">Mu</span>World</h1>
+    </section>
+    <div class="row">
+      <section class="staff">
+        <div class="form__container">
+          <h2>Staff Registration</h2>
+          <form class="staff__login" method="post" action="#" id="registerForm">
+            <label for="name">Name</label>
+            <input required type="text" name="name" id="nameRegisterField"/>
+            <label for="email">Email</label>
+            <input required type="text" name="email" id="emailRegisterField"/>
+            <label for="password">Password</label>
+            <input required type="password" name="password" id="passwordRegisterField"/>
+            <input class="login" type="submit" value="Register" id="registerSubmitButton"/>
+          </form>
+          <p> Already have an account?
+            <a href="/index.html">Login here!</a>
+          </p>
+        </div>
+      </section>
+    </div>
+    <footer>
+        <p class="footer__text">MuWorld Copyright &#169; 2023</p>
+    </footer>
+  </body>
+</html>
+
+<script>
+    const rForm = document.getElementById('registerForm');
+    var rName = document.getElementById('nameRegisterField').value;
+    var rEmail = document.getElementById('emailRegisterField').value;
+    var rPassword = document.getElementById('passwordRegisterField').value;
+
+    rForm.addEventListener('submit', (e) => {
+        console.log(asd);
+        e.preventDefault();
+    });
+</script>
