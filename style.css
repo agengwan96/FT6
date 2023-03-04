@@ -186,6 +186,11 @@ input{
   border-radius: 10%;
 }
 
+.reg__para, .reset__para, .alr__para{
+  text-align: center;
+  margin-top: 16px;
+}
+
 /*
   DASHBOARD
 */
@@ -249,7 +254,7 @@ footer{
   bottom: 0;
   background-color: black;
   height: 40px;
-  margin-top:auto;
+  margin-top: 24px;
 }
 
 .footer__text{
