@@ -25,3 +25,13 @@ form.addEventListener('submit', (e) => {
         e.preventDefault();
     }
 })
+
+/* Mobile menu functions */
+function openMenu(){
+    document.body.classList += " menu--open";
+    console.log("success");
+}
+
+function closeMenu(){
+    document.body.classList.remove('menu--open');
+}

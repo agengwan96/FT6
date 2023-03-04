@@ -30,6 +30,10 @@ a {
   transition: opacity 300ms ease;
 }
 
+i:hover, a:hover{
+  opacity: 0.7;
+}
+
 .red{
   color: red;
 }
@@ -62,9 +66,9 @@ a {
 */
 
 nav {
+  width: 100%;;
   height: 50px;
-  display: flex;
-  margin-bottom: 24px;
+  display: flex;  margin-bottom: 24px;
   background-color: black;
 }
 
@@ -106,7 +110,7 @@ li {
 }
 
 .btn__menu{
-  display: none;;
+  display: none;
   background-color: transparent;
   font-size: 40px;
   text-align: center;
@@ -116,7 +120,6 @@ li {
 }
 
 .menu__backdrop {
-  visibility: visible;
   background-color: black;
   position: absolute;
   display: flex;
@@ -128,14 +131,34 @@ li {
   right: 0;
   z-index: 100;
   visibility: hidden;
+  opacity: 0;
   transition: all 300ms ease;
 }
 
 .btn__menu--close{
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 20px;
 }
+
+.menu--open .menu__backdrop {
+  visibility: visible;
+  opacity: 1;
+}
+
+.menu--open {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.menu__link{
+  padding: 16px 0;
+}
+
+.nav__link--anchor:hover, .menu__link:hover, i:hover{
+  color: red;
+}
+
 
 /*
   INDEX
@@ -263,16 +286,18 @@ footer{
   padding: 8px 0;
 }
 
-@media(max-width: 550px){
-  .nav__link--list{
-    display: none;
+@media(max-width: 768px){
+  .nav__link--anchor, .logout{
+    font-size: 12px;
   }
+}
 
+@media(max-width: 550px){
   .btn__menu{
     display: flex;
   }
 
-  .logout{
+  .logout, .nav__link--list{
     display: none;
   }
 }
