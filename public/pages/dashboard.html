@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script
+      src="https://kit.fontawesome.com/c8e4d183c2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../app.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="../style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav__container">
+        <h1 class="logo red">MU<span class="world">WORLD</span></h1>
+        <ul class="nav__link--list">
+          <li class="nav__link">
+            <a href="./heatmap.html" class="nav__link--anchor">Heatmap</a>
+          </li>
+          <li class="nav__link">
+            <a href="./indiv_interaction.html" class="nav__link--anchor"
+              >Ind. Interaction</a
+            >
+          </li>
+          <li class="nav__link">
+            <a href="./org_interaction.html" class="nav__link--anchor"
+              >Org. Interaction</a
+            >
+          </li>
+          <li class="nav__link">
+            <a href="./mou.html" class="nav__link--anchor">MOU</a>
+          </li>
+        </ul>
+        <button class="logout">LogOut</button>
+        <button onclick="openMenu()" class="btn__menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu__backdrop">
+          <button onclick="closeMenu()" class="btn__menu btn__menu--close">
+            <i class="fas fa-times"></i>
+          </button>
+          <ul class="menu__links">
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./heatmap.html"
+                >Heatmap</a
+              >
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./indiv_interaction.html"
+                >Ind. Interaction</a
+              >
+            </li>
+            <li class="menu__list">
+              <a class="menu__link" href="./org_interaction.html"
+                >Org. Interaction</a
+              >
+            </li>
+            <li class="menu__list">
+              <a class="menu__link" href="./mou.html"
+                >MOU</a
+              >
+            </li><li class="menu__list">
+              <a class="menu__link"
+                >LogOut</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="dashboard--wrapper">
+    <section id="dashboard">
+      <h1 class="sub__title"><span class="red">D</span>ashboard</h1>
+    </section>
+    <section id="user__search">
+      <h2 class="user__search--title">Search User</h2>
+      <form class="user__search--form">
+        <input class="user__search--input" value="Search by User">
+        <button class="user__search--btn">Search</button>
+      </form>
+      <fieldset class="user__search--results">
+        
+      </fieldset>
+    </section>
+    </div>
+    <footer>
+      <p class="footer__text">MuWorld Copyright &#169; 2023</p>
+    </footer>
+  </body>
+</html>

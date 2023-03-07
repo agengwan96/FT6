@@ -1,0 +1,303 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.row{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  position: relative;
+  transition: opacity 300ms ease;
+}
+
+i:hover, a:hover{
+  opacity: 0.7;
+}
+
+.red{
+  color: red;
+}
+
+/*
+  HEADER
+*/
+
+.header{
+  background-color: black;
+  height: 50px;
+}
+
+.title{
+  padding: 10px 0;
+  text-align: center;
+}
+
+.sub__title{
+  text-align: center;
+  font-size: 40pt;
+}
+
+.world{
+  color: white;
+}
+
+/*
+  NAVIGATION
+*/
+
+nav {
+  width: 100%;;
+  height: 50px;
+  display: flex;  margin-bottom: 24px;
+  background-color: black;
+}
+
+.nav__container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.nav__link--anchor,
+.menu__link {
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  margin: 0 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.nav__link--list {
+  display: flex;
+  align-items: center;
+}
+
+li {
+  list-style-type: none;
+}
+
+.logout{
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: black;
+}
+
+.btn__menu{
+  display: none;
+  background-color: transparent;
+  font-size: 40px;
+  text-align: center;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.menu__backdrop {
+  background-color: black;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 300ms ease;
+}
+
+.btn__menu--close{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.menu--open .menu__backdrop {
+  visibility: visible;
+  opacity: 1;
+}
+
+.menu--open {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.menu__link{
+  padding: 16px 0;
+}
+
+.nav__link--anchor:hover, .menu__link:hover, i:hover{
+  color: red;
+}
+
+
+/*
+  INDEX
+*/
+
+.welcome{
+  text-align: center;
+  padding-top: 30px;
+  font-size: 50pt;
+}
+
+.muworld{
+  text-align: center;
+  font-size: 55pt;
+  margin-bottom: 24px;
+}
+
+h2{
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 400px;
+}
+
+.form__container{
+  width: 100%;
+}
+
+input{
+  margin-bottom: 16px;
+  padding: 4px 4px;
+}
+
+.login{
+  width: 100%;
+  max-width: 100px;
+  height: 32px;
+  background-color: red;
+  color: white;
+  font-weight: 1000;
+  margin: 0 auto;
+  border: none;
+  border-radius: 10%;
+}
+
+.reg__para, .reset__para, .alr__para{
+  text-align: center;
+  margin-top: 16px;
+}
+
+/*
+  DASHBOARD
+*/
+
+.dashboard--wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1000px;
+}
+
+#dashboard{
+  width: 80%;
+}
+
+/*
+  USER SEARCH
+*/
+
+#user__search{
+  padding: 16px 0;
+  width: 20%;
+}
+
+.user__search--form{
+  flex-direction: row;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.user__search--title{
+  text-align: left;
+}
+
+.user__search--input{
+  width: 70%;
+  height: 30px;
+}
+
+.user__search--btn{
+  width: 30%;
+  height: 30px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 8%;
+}
+
+.user__search--results{
+  border-color: lightgray;
+  border-top: none;
+  border-bottom: none;
+  width: 400px;
+  height: 100vh;
+}
+
+/*
+  FOOTER
+*/
+
+footer{
+  bottom: 0;
+  background-color: black;
+  height: 40px;
+  margin-top: 24px;
+}
+
+.footer__text{
+  color:white;
+  text-align: center;
+  padding: 8px 0;
+}
+
+@media(max-width: 768px){
+  .nav__link--anchor, .logout{
+    font-size: 12px;
+  }
+}
+
+@media(max-width: 550px){
+  .btn__menu{
+    display: flex;
+  }
+
+  .logout, .nav__link--list{
+    display: none;
+  }
+}
