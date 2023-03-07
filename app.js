@@ -6,7 +6,6 @@ const passwordField = document.getElementById('passwordTextField');
 /* Validates email to be an @murdoch.edu.au domain using regex */
 function ValidateMurdochEmail() {
     var mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
-
     if (emailField.value.match(mailformat)) {
         alert("VALID EMAIL");
         return true;
