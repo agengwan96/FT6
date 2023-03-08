@@ -229,7 +229,7 @@ input{
 
 #dashboard{
   width: 80%;
-  padding: 0 16px;
+  padding: 0 8px;
 }
 
 fieldset{
@@ -246,6 +246,8 @@ fieldset{
 
 #user__search{
   width: 20%;
+  min-width: 200px;
+  padding: 8px 16px;
 }
 
 .user__search--form{
