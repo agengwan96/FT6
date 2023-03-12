@@ -26,6 +26,8 @@
         <div class="form__container">
           <h2>Staff Registration</h2>
           <form class="staff__login" method="post" action="#" id="registerForm">
+            <label for="username">Username</label>
+            <input required type="text" name="username" id="usernameRegisterField"/>
             <label for="email">Email</label>
             <input required type="text" name="email" id="emailRegisterField"/>
             <label for="password">Password</label>
@@ -48,6 +50,7 @@
   /* Importing and initializing firebase libraries */
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
   const firebaseConfig = {
       apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
@@ -62,36 +65,65 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
+  const database = getDatabase(app);
 
   /* Sign up user */
   document.getElementById('registerSubmitButton').addEventListener('click', (e) => {
+    /* Pauses everything */
     e.preventDefault();
+
+    /* Gets var that we need */
     const emailVar = document.getElementById('emailRegisterField').value;
     const passwordVar = document.getElementById('passwordRegisterField').value;
+    const usernameVar = document.getElementById('usernameRegisterField').value;
 
     /* Regex for checking if its a school domain */
     var mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
+
+    /* Checks for empty fields */
+    if (emailVar === '' || passwordVar === '' ||
+    emailVar === null || passwordVar === null) {
+          alert('Please enter required fields!');
+          return true;
+        }
 
     /* Validates email to be an @murdoch.edu.au domain using regex */
     if (!emailVar.match(mailformat)) {
       alert('Invalid email address! Please enter a @murdoch.edu.au domain email');
       emailVar.focus();
-      return true;
+      return true;  // Returns if its a invalid domain
     }
 
+    /* If domain is correct, create user */
     createUserWithEmailAndPassword(auth, emailVar, passwordVar)
     .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        // ...
-        alert('successfully created acc');
 
+        // Creating user info in real time database
+        set(ref(database, 'users/' + user.uid), {
+          username: usernameVar,
+          email: emailVar,
+          password: passwordVar,
+        })
+        .then(() => {
+          // Data saved successfully!
+          alert('User created successfully');
+        })
+        .catch((error) => {
+          // Write failed
+          alert(error);
+        });
+        alert('successfully created acc');
+        window.location.href = '/index.html';
+
+        /* // Sned email verification (doesnt work on mudoch domain, may take out later)
         sendEmailVerification(user)
         .then(() => {
             // Email verification sent!
             let msg = 'An email verification link has been sent to ' + user.email;
             alert(msg);
-        });
+        }); */
     })
     .catch((error) => {
         const errorCode = error.code;

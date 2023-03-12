@@ -24,12 +24,12 @@
       <section class="staff">
         <div class="form__container">
           <h2>Staff Login</h2>
-          <form class="staff__login" method="post" action="staffLogin()" id="loginForm">
+          <form class="staff__login" method="post" id="loginForm">
             <label for="email">Email</label>
-            <input required type="text" name="email" id="emailTextField"/>
+            <input required type="text" name="email" id="emailLoginField"/>
             <label for="password">Password</label>
-            <input required type="password" name="password" id="passwordTextField"/>
-            <input class="login" type="submit" value="Login"/>
+            <input required type="password" name="password" id="passwordLoginField"/>
+            <input class="login" type="submit" value="Login" id="loginSubmitButton"/>
           </form>
           <p class="reg__para"> New to this?
             <a class="red" href="./pages/staff_register.html">Register here!</a>
@@ -51,6 +51,7 @@
   /* Importing and initializing firebase libraries */
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
   const firebaseConfig = {
       apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
@@ -65,8 +66,30 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
+  const database = getDatabase(app);
 
   /* Login user */
+  document.getElementById('loginSubmitButton').addEventListener('click',(e) => {
+    const emailVar = document.getElementById('emailLoginField').value;
+    const passwordVar = document.getElementById('passwordLoginField').value;
 
+    signInWithEmailAndPassword(auth, emailVar, passwordVar)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // Update last sign in date
+      var loginDate = new Date();
+      update(ref(database, 'users/' + user.uid), {
+        last_login: loginDate,
+      });
 
+      alert('Successfully logged in!');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage + ' ' + errorCode);
+      alert(emailVar + ' ' + passwordVar);
+    });
+  });
 </script>

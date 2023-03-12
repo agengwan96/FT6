@@ -17,13 +17,13 @@ function ValidateMurdochEmail() {
 
 /* Listener for form. Calls ValidateMurdochEmail() function and checks for authentcity.
    Need to modify this for authenticating with Firebase. */
-form.addEventListener('submit', (e) => {
+/* form.addEventListener('submit', (e) => {
     if (emailField.value === '' || passwordField === '' ||
         emailField.value === null || passwordField === null ||
         ValidateMurdochEmail() === false) {
         e.preventDefault();
     }
-})
+}) */
 
 /* Mobile menu functions */
 function openMenu(){
