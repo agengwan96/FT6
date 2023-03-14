@@ -24,12 +24,12 @@
       <section class="staff">
         <div class="form__container">
           <h2>Staff Login</h2>
-          <form class="staff__login" method="post" action="staffLogin()" id="loginForm">
+          <form class="staff__login" method="post" id="loginForm">
             <label for="email">Email</label>
-            <input required type="text" name="email" id="emailTextField"/>
+            <input required type="text" name="email" id="loginEmail"/>
             <label for="password">Password</label>
-            <input required type="password" name="password" id="passwordTextField"/>
-            <input class="login" type="submit" value="Login"/>
+            <input required type="password" name="password" id="loginPassword"/>
+            <input class="login" type="submit" value="Login" id="loginButton"/>
           </form>
           <p class="reg__para"> New to this?
             <a class="red" href="./pages/staff_register.html">Register here!</a>
@@ -45,3 +45,57 @@
     </footer>
   </body>
 </html>
+
+<script type="module">
+  // Firebase App (the core Firebase SDK) is always required and must be listed first
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+      apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
+      authDomain: "muworldv1-ft6.firebaseapp.com",
+      databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "muworldv1-ft6",
+      storageBucket: "muworldv1-ft6.appspot.com",
+      messagingSenderId: "659133217389",
+      appId: "1:659133217389:web:386e36e80f023670421d64",
+      measurementId: "G-BQJCVKPBJN"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const database = getDatabase();
+
+  // Login
+  const loginEmail = document.getElementById('loginEmail');
+  const loginPassword = document.getElementById('loginPassword');
+
+  // Login Button Event Listener
+  document.getElementById('loginButton').addEventListener('click', (e) => {
+    e.preventDefault();
+        signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                
+                // Update last login
+                const lastLogin = new Date().toLocaleString();
+
+                update(ref(database, 'staff/' + user.uid), {
+                    lastLogin: lastLogin
+                });
+
+                alert('Login Successful');
+
+                window.location.href = './pages/dashboard.html';
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert('Login Failed');
+            });
+  });
+</script>

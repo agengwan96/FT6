@@ -10,7 +10,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="/app.js" defer></script>
-    <script type="module" src="../scripts/firebase_scripts.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../style.css" />
   </head>
   <body>
@@ -26,6 +25,8 @@
         <div class="form__container">
           <h2>Staff Registration</h2>
           <form class="staff__login" method="post" action="#" id="registerForm">
+            <label for="username">Username</label>
+            <input required type="text" name="username" id="usernameRegisterField"/>
             <label for="email">Email</label>
             <input required type="text" name="email" id="emailRegisterField"/>
             <label for="password">Password</label>
@@ -43,3 +44,98 @@
     </footer>
   </body>
 </html>
+
+<script type="module">
+  /* Importing and initializing firebase libraries */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+      apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
+      authDomain: "muworldv1-ft6.firebaseapp.com",
+      databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "muworldv1-ft6",
+      storageBucket: "muworldv1-ft6.appspot.com",
+      messagingSenderId: "659133217389",
+      appId: "1:659133217389:web:386e36e80f023670421d64",
+      measurementId: "G-BQJCVKPBJN"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const database = getDatabase();
+
+  /* Sign up user */
+  document.getElementById('registerSubmitButton').addEventListener('click', (e) => {
+    /* Pauses everything */
+    e.preventDefault();
+
+    /* Gets var that we need */
+    const emailVar = document.getElementById('emailRegisterField').value;
+    const passwordVar = document.getElementById('passwordRegisterField').value;
+    const usernameVar = document.getElementById('usernameRegisterField').value;
+
+    /* Regex for checking if its a school domain */
+    var mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
+
+    /* Checks for empty fields */
+    if (emailVar === '' || passwordVar === '' ||
+    emailVar === null || passwordVar === null) {
+          alert('Please enter required fields!');
+          return true;
+        }
+
+    /* Validates email to be an @murdoch.edu.au domain using regex */
+    if (!emailVar.match(mailformat)) {
+      alert('Invalid email address! Please enter a @murdoch.edu.au domain email');
+      emailVar.focus();
+      return true;  // Returns if its a invalid domain
+    }
+
+    /* If domain is correct, create user */
+    createUserWithEmailAndPassword(auth, emailVar, passwordVar)
+    .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+
+        // Update user profile
+        updateProfile(user, {
+          displayName: usernameVar
+        });
+
+        // Creating user info in real time database
+        set(ref(database, 'users/' + user.uid), {
+          username: usernameVar,
+          email: emailVar,
+          password: passwordVar,
+          role: 'staff'
+        })
+        .then(() => {
+          // Data saved successfully!
+          alert('User created successfully');
+        })
+        .catch((error) => {
+          // Write failed
+          alert(error);
+        });
+        alert('successfully created acc');
+
+        /* // Send email verification (doesnt work on mudoch domain, may take out later)
+        sendEmailVerification(user)
+        .then(() => {
+            // Email verification sent!
+            let msg = 'An email verification link has been sent to ' + user.email;
+            alert(msg);
+        }); */
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+        alert(errorMessage);
+    });
+});
+</script>

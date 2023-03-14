@@ -26,10 +26,10 @@
           <h2>Staff Login</h2>
           <form class="staff__login" method="post" id="loginForm">
             <label for="email">Email</label>
-            <input required type="text" name="email" id="emailLoginField"/>
+            <input required type="text" name="email" id="loginEmail"/>
             <label for="password">Password</label>
-            <input required type="password" name="password" id="passwordLoginField"/>
-            <input class="login" type="submit" value="Login" id="loginSubmitButton"/>
+            <input required type="password" name="password" id="loginPassword"/>
+            <input class="login" type="submit" value="Login" id="loginButton"/>
           </form>
           <p class="reg__para"> New to this?
             <a class="red" href="./pages/staff_register.html">Register here!</a>
@@ -46,13 +46,13 @@
   </body>
 </html>
 
-
 <script type="module">
-  /* Importing and initializing firebase libraries */
+  // Firebase App (the core Firebase SDK) is always required and must be listed first
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
   import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
+  // Your web app's Firebase configuration
   const firebaseConfig = {
       apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
       authDomain: "muworldv1-ft6.firebaseapp.com",
@@ -64,32 +64,38 @@
       measurementId: "G-BQJCVKPBJN"
   };
 
+  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
-  const database = getDatabase(app);
+  const database = getDatabase();
 
-  /* Login user */
-  document.getElementById('loginSubmitButton').addEventListener('click',(e) => {
-    const emailVar = document.getElementById('emailLoginField').value;
-    const passwordVar = document.getElementById('passwordLoginField').value;
+  // Login
+  const loginEmail = document.getElementById('loginEmail');
+  const loginPassword = document.getElementById('loginPassword');
 
-    signInWithEmailAndPassword(auth, emailVar, passwordVar)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      // Update last sign in date
-      var loginDate = new Date();
-      update(ref(database, 'users/' + user.uid), {
-        last_login: loginDate,
-      });
+  // Login Button Event Listener
+  document.getElementById('loginButton').addEventListener('click', (e) => {
+    e.preventDefault();
+        signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                
+                // Update last login
+                const lastLogin = new Date().toLocaleString();
 
-      alert('Successfully logged in!');
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage + ' ' + errorCode);
-      alert(emailVar + ' ' + passwordVar);
-    });
+                update(ref(database, 'staff/' + user.uid), {
+                    lastLogin: lastLogin
+                });
+
+                alert('Login Successful');
+
+                window.location.href = './pages/dashboard.html';
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert('Login Failed');
+            });
   });
 </script>

@@ -34,7 +34,7 @@
             <a href="./mou.html" class="nav__link--anchor">MOU</a>
           </li>
         </ul>
-        <button class="logout">LogOut</button>
+        <button class="logout" id="logoutButton">LogOut</button>
         <button onclick="openMenu()" class="btn__menu">
           <i class="fas fa-bars"></i>
         </button>
@@ -44,28 +44,19 @@
           </button>
           <ul class="menu__links">
             <li class="menu__list">
-              <a onclick="closeMenu()" class="menu__link" href="./heatmap.html"
-                >Heatmap</a
-              >
+              <a onclick="closeMenu()" class="menu__link" href="./heatmap.html">Heatmap</a>
             </li>
             <li class="menu__list">
-              <a onclick="closeMenu()" class="menu__link" href="./indiv_interaction.html"
-                >Ind. Interaction</a
-              >
+              <a onclick="closeMenu()" class="menu__link" href="./indiv_interaction.html">Ind. Interaction</a>
             </li>
             <li class="menu__list">
-              <a class="menu__link" href="./org_interaction.html"
-                >Org. Interaction</a
-              >
+              <a class="menu__link" href="./org_interaction.html">Org. Interaction</a>
             </li>
             <li class="menu__list">
-              <a class="menu__link" href="./mou.html"
-                >MOU</a
-              >
-            </li><li class="menu__list">
-              <a class="menu__link"
-                >LogOut</a
-              >
+              <a class="menu__link" href="./mou.html">MOU</a>
+            </li>
+            <li class="menu__list">
+              <a class="menu__link">LogOut</a>
             </li>
           </ul>
         </div>
@@ -73,6 +64,8 @@
     </nav>
     <div class="dashboard--wrapper">
     <div id="dashboard">
+      <h1> Welcome </h1>
+      <h1 id="userName"></h1>
       <h1 class="sub__title"><span class="red">D</span>ashboard</h1>
       <fieldset>
 
@@ -94,3 +87,58 @@
     </footer>
   </body>
 </html>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+  import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+  const firebaseConfig = {
+      apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
+      authDomain: "muworldv1-ft6.firebaseapp.com",
+      databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "muworldv1-ft6",
+      storageBucket: "muworldv1-ft6.appspot.com",
+      messagingSenderId: "659133217389",
+      appId: "1:659133217389:web:386e36e80f023670421d64",
+      measurementId: "G-BQJCVKPBJN"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth();
+  const database = getDatabase();
+
+  // Get the current user
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      alert('User is signed in');
+
+      const userRef = ref(database, 'users/' + uid);
+      onValue(userRef, (snapshot) => {
+        const data = snapshot.val();
+        document.getElementById('userName').innerHTML = data.username;
+      });
+      
+    } else {
+      // User is signed out
+      alert('User is not signed in');
+    }
+  });
+
+  document.getElementById('logoutButton').addEventListener('click', (e) => {
+    e.preventDefault();
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      alert('Logout Successful');
+      window.location.href = '../index.html';
+    }).catch((error) => {
+      // An error happened.
+      alert('Logout Failed');
+    });
+  });
+</script>

@@ -10,7 +10,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="/app.js" defer></script>
-    <!-- <script type="module" src="../scripts/firebase_scripts.js" defer></script> -->
     <link rel="stylesheet" type="text/css" href="../style.css" />
   </head>
   <body>
@@ -49,9 +48,10 @@
 <script type="module">
   /* Importing and initializing firebase libraries */
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
   import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
+  // Your web app's Firebase configuration
   const firebaseConfig = {
       apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
       authDomain: "muworldv1-ft6.firebaseapp.com",
@@ -63,9 +63,10 @@
       measurementId: "G-BQJCVKPBJN"
   };
 
+  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
-  const database = getDatabase(app);
+  const database = getDatabase();
 
   /* Sign up user */
   document.getElementById('registerSubmitButton').addEventListener('click', (e) => {
@@ -100,11 +101,17 @@
         // Signed in 
         const user = userCredential.user;
 
+        // Update user profile
+        updateProfile(user, {
+          displayName: usernameVar
+        });
+
         // Creating user info in real time database
         set(ref(database, 'users/' + user.uid), {
           username: usernameVar,
           email: emailVar,
           password: passwordVar,
+          role: 'staff'
         })
         .then(() => {
           // Data saved successfully!
@@ -115,9 +122,8 @@
           alert(error);
         });
         alert('successfully created acc');
-        window.location.href = '/index.html';
 
-        /* // Sned email verification (doesnt work on mudoch domain, may take out later)
+        /* // Send email verification (doesnt work on mudoch domain, may take out later)
         sendEmailVerification(user)
         .then(() => {
             // Email verification sent!

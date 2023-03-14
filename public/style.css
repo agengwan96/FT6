@@ -53,7 +53,7 @@ i:hover, a:hover{
 }
 
 .sub__title{
-  text-align: center;
+  text-align: left;
   font-size: 40pt;
 }
 
@@ -221,11 +221,23 @@ input{
 .dashboard--wrapper{
   display: flex;
   flex-wrap: wrap;
-  max-width: 1000px;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1080px;
 }
 
 #dashboard{
   width: 80%;
+  padding: 0 8px;
+}
+
+fieldset{
+  height: 100vh;
+  width: 100%;
+  border-color: lightgray;
+  border-top: none;
+  border-bottom: none;
 }
 
 /*
@@ -233,14 +245,16 @@ input{
 */
 
 #user__search{
-  padding: 16px 0;
   width: 20%;
+  min-width: 200px;
+  padding: 8px 16px;
 }
 
 .user__search--form{
   flex-direction: row;
   margin-bottom: 0;
   padding-bottom: 0;
+  width: 100%;
 }
 
 .user__search--title{
@@ -262,11 +276,7 @@ input{
 }
 
 .user__search--results{
-  border-color: lightgray;
-  border-top: none;
-  border-bottom: none;
-  width: 400px;
-  height: 100vh;
+  
 }
 
 /*
