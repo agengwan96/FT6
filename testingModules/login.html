@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="login.css">
+    </head>
+    <body>
+        <h1>Login</h1>
+        <br>
+        <input class='email' type="text" id="loginEmail" placeholder="Email">
+        <input class="password" type="password" id="loginPassword" placeholder="Password">
+        <br>
+        <button class="buttons" id="loginButton">Login</button>
+        <br>
+
+        <h1>Register</h1>
+        <br>
+        <input class="email" type="text" id="registerEmail" placeholder="Email">
+        <input class="password" type="password" id="registerPassword" placeholder="Password">
+        <br>
+        <button class="buttons" id="registerButton">Register</button>
+        <br>
+
+        <h1>Logout</h1>
+        <button class="buttons" id="logoutButton">Logout</button>
+        <br>
+    </body>
+</html>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+    import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
+        authDomain: "muworldv1-ft6.firebaseapp.com",
+        databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "muworldv1-ft6",
+        storageBucket: "muworldv1-ft6.appspot.com",
+        messagingSenderId: "659133217389",
+        appId: "1:659133217389:web:386e36e80f023670421d64",
+        measurementId: "G-BQJCVKPBJN"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+    const database = getDatabase();
+
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPassword = document.getElementById('loginPassword');
+
+    const registerEmail = document.getElementById('registerEmail');
+    const registerPassword = document.getElementById('registerPassword');
+
+    document.getElementById('loginButton').addEventListener('click', (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+                alert('Login Successful');
+                window.location.href = 'dashboard.html';
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert('Login Failed');
+            });
+    });
+
+    document.getElementById('registerButton').addEventListener('click', (e) => {
+        e.preventDefault();
+        createUserWithEmailAndPassword(auth, registerEmail.value, registerPassword.value)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+                set(ref(database, 'users/' + user.uid), {
+                    email: user.email,
+                    uid: user.uid
+                }).then(() => {
+                    alert('Data saved successfully!');
+                }).catch((error) => {
+                    alert('Data could not be saved.' + error);
+                });
+                alert('Register Successful');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+                alert('Register Failed');
+            });
+    });
+</script>
