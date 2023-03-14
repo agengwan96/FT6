@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="login.css">
+    </head>
+    <body>
+        <h1>Welcome</h1>
+        <label for="logoutButton">Logout</label>
+        <button class="buttons" id="logoutButton">Bye</button>
+        <br>
+    </body>
+</html>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
+        authDomain: "muworldv1-ft6.firebaseapp.com",
+        databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "muworldv1-ft6",
+        storageBucket: "muworldv1-ft6.appspot.com",
+        messagingSenderId: "659133217389",
+        appId: "1:659133217389:web:386e36e80f023670421d64",
+        measurementId: "G-BQJCVKPBJN"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+
+    document.getElementById('logoutButton').addEventListener('click', (e) => {
+        e.preventDefault();
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            alert('Logout Successful');
+            window.location.href = 'login.html';
+        }).catch((error) => {
+            // An error happened.
+            alert('Logout Failed');
+        });
+    });
+</script>
