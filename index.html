@@ -49,8 +49,8 @@
 <script type="module">
   // Firebase App (the core Firebase SDK) is always required and must be listed first
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-  import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getDatabase, ref, set, update, get } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -83,13 +83,23 @@
                 
                 // Update last login
                 const lastLogin = new Date().toLocaleString();
-
-                update(ref(database, 'staff/' + user.uid), {
+                update(ref(database, 'users/' + user.uid), {
                     lastLogin: lastLogin
                 });
 
+                // Alert login successful
                 alert('Login Successful');
 
+                // Get current user
+                onAuthStateChanged(auth, (user) => {
+                  if (user) {
+                    
+
+                  } else {
+                    alert('No user is signed in');
+                  }
+                });
+                  
                 window.location.href = './pages/dashboard.html';
             })
             .catch((error) => {
