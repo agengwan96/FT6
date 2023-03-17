@@ -53,7 +53,7 @@ i:hover, a:hover{
 }
 
 .sub__title{
-  text-align: left;
+  text-align: center;
   font-size: 40pt;
 }
 
@@ -218,65 +218,37 @@ input{
   DASHBOARD
 */
 
-.dashboard--wrapper{
+#dashboard{
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 8px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard__icons{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1080px;
-}
-
-#dashboard{
-  width: 80%;
-  padding: 0 8px;
-}
-
-fieldset{
-  height: 100vh;
-  width: 100%;
-  border-color: lightgray;
-  border-top: none;
-  border-bottom: none;
-}
-
-/*
-  USER SEARCH
-*/
-
-#user__search{
-  width: 20%;
-  min-width: 200px;
-  padding: 8px 16px;
-}
-
-.user__search--form{
-  flex-direction: row;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  padding: 16px 32px;
   width: 100%;
 }
 
-.user__search--title{
-  text-align: left;
+.icon__link{
+  width: calc(100%/3);
+  text-align: center;
+  margin: 24px 0;
 }
 
-.user__search--input{
-  width: 70%;
-  height: 30px;
+i{
+  font-size: 200px;
+  color: red;
 }
 
-.user__search--btn{
-  width: 30%;
-  height: 30px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 8%;
-}
-
-.user__search--results{
-  
+.icon__name{
+  color: black;
 }
 
 /*
@@ -287,7 +259,7 @@ footer{
   bottom: 0;
   background-color: black;
   height: 40px;
-  margin-top: 24px;
+  margin-top: auto;
 }
 
 .footer__text{
