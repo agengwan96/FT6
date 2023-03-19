@@ -5,6 +5,17 @@ const form = document.getElementById('loginForm');
 const emailField = document.getElementById('emailTextField');
 const passwordField = document.getElementById('passwordTextField');
 let map;
+let r;
+let country;
+let weight;
+/*location object containing coordinates of country and count*/
+let locations = {
+    lati: 0,
+    long: 0,
+    count: 0
+};
+/*array that wil contain locations object*/
+let heatArr = [];
 
 /* 
     Validates email to be an @murdoch.edu.au domain using regex 
@@ -51,3 +62,32 @@ function initMap(){
 }
 
 window.initMap = initMap;
+
+/*
+    GeoCode
+*/
+function geocode(country, weight){
+    axios.get("https://maps.googleapis.com/maps/api/geocode/json", {
+        params: {
+            address: country,
+            key: "AIzaSyCjdKyrFDIIxYLcHJ2C5_4QV-bdfF7ZWTE"
+        }
+    })
+    .then(function(resp){
+            locations.lati = resp.data.results[0].geometry.location.lat;
+            location.long = resp.data.results[0].geometry.location.lng;
+            locations.count = weight;
+            add(locations);
+    })
+    .catch(function(err){
+        console.log("Error for geocode");
+    });
+}   
+
+function add(r){
+    heatArr.push(r);
+    let c = 0;
+    console.log(heatArr[c]);
+    c = c + 1;
+
+}
