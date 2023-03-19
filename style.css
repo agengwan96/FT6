@@ -218,7 +218,7 @@ input{
   DASHBOARD
 */
 
-#dashboard{
+#dashboard, #heatmap{
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
@@ -252,6 +252,24 @@ i{
 }
 
 /*
+  HEATMAP
+*/
+
+#heatmap{
+  flex-direction: row;
+}
+
+.map__container{
+  width: 100%;
+  max-width: 768px;
+}
+
+#map{
+  height: 508px;
+  width: 100%;
+}
+
+/*
   FOOTER
 */
 
@@ -272,6 +290,14 @@ footer{
   .nav__link--anchor, .logout{
     font-size: 12px;
   }
+
+  #heatmap{
+    flex-direction: column;
+  }
+
+  h1{
+    font-size: 24px;
+  }
 }
 
 @media(max-width: 550px){
@@ -281,5 +307,9 @@ footer{
 
   .logout, .nav__link--list{
     display: none;
+  }
+
+  h1{
+    font-size: 16px;
   }
 }

@@ -11,7 +11,12 @@
     ></script>
     <script src="../scripts/app.js" defer></script>
     <script type="module" src="../scripts/modules.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="../style.css" />  </head>
+    <link rel="stylesheet" type="text/css" href="../style.css" />
+    <script
+      async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqAqdB4PR0Hg2ISiZiCB2z7K0-Hmv0pwc&callback=initMap"
+    ></script>
+  </head>
   <body>
     <nav>
       <div class="nav__container">
@@ -38,10 +43,16 @@
       </div>
     </nav>
     <section id="heatmap">
-      <h1 class="sub__title"><span class="red">P</span>artner Location Heatmap</h1>
+      <h1 class="sub__title">
+        <span class="red">P</span>artner Location Heatmap
+      </h1>
+      <div class="map__container">
+        <div id="map"></div>
+      </div>
     </section>
     <footer>
       <p class="footer__text">MuWorld Copyright &#169; 2023</p>
     </footer>
+    
   </body>
 </html>
