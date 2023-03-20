@@ -10,7 +10,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="./scripts/app.js" defer></script>
-    <script type="module" src="./scripts/modules.js defer"></script>
+    <script type="module" src="./scripts/modules.js" defer></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body>
@@ -45,72 +45,4 @@
         <p class="footer__text">MuWorld Copyright &#169; 2023</p>
     </footer>
   </body>
-<<<<<<< HEAD
 </html>
-
-<script type="module">
-  // Firebase App (the core Firebase SDK) is always required and must be listed first
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-  import { getDatabase, ref, set, update, get } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-      apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
-      authDomain: "muworldv1-ft6.firebaseapp.com",
-      databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "muworldv1-ft6",
-      storageBucket: "muworldv1-ft6.appspot.com",
-      messagingSenderId: "659133217389",
-      appId: "1:659133217389:web:386e36e80f023670421d64",
-      measurementId: "G-BQJCVKPBJN"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth();
-  const database = getDatabase();
-
-  // Login
-  const loginEmail = document.getElementById('loginEmail');
-  const loginPassword = document.getElementById('loginPassword');
-
-  // Login Button Event Listener
-  document.getElementById('loginButton').addEventListener('click', (e) => {
-    e.preventDefault();
-        signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                
-                // Update last login
-                const lastLogin = new Date().toLocaleString();
-                update(ref(database, 'users/' + user.uid), {
-                    lastLogin: lastLogin
-                });
-
-                // Alert login successful
-                alert('Login Successful');
-
-                // Get current user
-                onAuthStateChanged(auth, (user) => {
-                  if (user) {
-                    
-
-                  } else {
-                    alert('No user is signed in');
-                  }
-                });
-                  
-                window.location.href = './pages/dashboard.html';
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert('Login Failed');
-            });
-  });
-</script>
-=======
-</html>
->>>>>>> main

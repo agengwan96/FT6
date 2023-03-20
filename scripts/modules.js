@@ -1,7 +1,7 @@
     // Firebase App (the core Firebase SDK) is always required and must be listed first
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-    import { getDatabase, ref, set, update } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+    import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+    import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
   
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -35,7 +35,7 @@
                   // Update last login
                   const lastLogin = new Date().toLocaleString();
   
-                  update(ref(database, 'staff/' + user.uid), {
+                  update(ref(database, 'users/' + user.uid), {
                       lastLogin: lastLogin
                   });
   
@@ -50,28 +50,7 @@
               });
     });
     
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
-  import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
-  const firebaseConfig = {
-      apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
-      authDomain: "muworldv1-ft6.firebaseapp.com",
-      databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "muworldv1-ft6",
-      storageBucket: "muworldv1-ft6.appspot.com",
-      messagingSenderId: "659133217389",
-      appId: "1:659133217389:web:386e36e80f023670421d64",
-      measurementId: "G-BQJCVKPBJN"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const auth = getAuth();
-  const database = getDatabase();
 
   // Get the current user
   onAuthStateChanged(auth, (user) => {

@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
@@ -16,13 +17,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-registerForm.addEventListener('submit', (e) => {
+/* registerForm.addEventListener('submit', (e) => {
     if (emailField.value === '' || passwordField === '' ||
         emailField.value === null || passwordField === null ||
         ValidateMurdochEmail() === false) {
         e.preventDefault();
     }
-})
+}) */
 
 document.getElementById('registerSubmitButton').addEventListener('click', (e) => {
     e.preventDefault();
@@ -62,3 +63,34 @@ signInWithEmailAndPassword(auth, email, password)
     const errorCode = error.code;
     const errorMessage = error.message;
   });
+
+// get user interaction details and store them in firebase cloud firestore
+function storeUserInteractionDetails() {
+    const db = firebase.firestore();
+    db.collection("userInteractionDetails").add({
+        staffName: document.getElementById("staffName").value,
+        staffRole: document.getElementById("staffRole").value,
+        staffDepartment: document.getElementById("staffDepartment").value,
+        staffContact: document.getElementById("staffContact").value,
+        visitDate: document.getElementById("visitDate").value,
+        visitPurpose: document.getElementById("visitPurpose").value,
+        visitStatus: document.getElementById("visitStatus").value,
+        orgName: document.getElementById("orgName").value,
+        orgAddress: document.getElementById("orgAddress").value,
+        orgType: document.getElementById("orgType").value,
+        dateSubmitted: new Date(),
+    })
+    .then((docRef) => {
+        alert("Your details have been submitted successfully!");
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+    });
+};
+
+document.getElementById('indIntSubmit').addEventListener('click', (e) => {
+    alert('test');
+    //e.preventDefault();
+   // storeUserInteractionDetails();
+});
