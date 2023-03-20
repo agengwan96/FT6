@@ -75,3 +75,107 @@
     </footer>
   </body>
 </html>
+
+<script type="module">
+  import { initializeApp } from 'firebase/app';
+  import { getFirestore, collection, addDoc } from 'firebase/firestore';
+
+  const firebaseConfig = {
+    // Replace with your actual Firebase project configuration
+    apiKey: 'AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU',
+    authDomain: "muworldv1-ft6.firebaseapp.com",
+    databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "muworldv1-ft6",
+    storageBucket: "muworldv1-ft6.appspot.com",
+    messagingSenderId: "659133217389",
+    appId: "1:659133217389:web:386e36e80f023670421d64",
+    measurementId: "G-BQJCVKPBJN"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const database = getDatabase();
+
+  // Form submission handler
+  const form = document.getElementById('interaction-form');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // Validate form fields
+    if (!validateForm()) {
+      alert('Please fill in all required fields correctly.');
+      return;
+    }
+
+    // Get form data
+    const formData = new FormData(form);
+    const interactionData = {
+      staffId: formData.get('staffId'),
+      staffName: formData.get('staffName'),
+      staffRole: formData.get('staffRole'),
+      staffDepartment: formData.get('staffDepartment'),
+      staffContactDetail: formData.get('staffContactDetail'),
+      visitDate: formData.get('visitDate'),
+      completionStatus: formData.get('completionStatus'),
+      organisationId: formData.get('organisationId'),
+      organisationName: formData.get('organisationName'),
+      organisationAddress: formData.get('organisationAddress'),
+      organisationType: formData.get('organisationType')
+    };
+
+    try {
+      // Add interaction data to Firebase
+      const interactionRef = collection(db, 'interactions');
+      await addDoc(interactionRef, interactionData);
+      alert('Interaction data successfully submitted.');
+      form.reset();
+    } catch (error) {
+      console.error('Error adding document: ', error);
+      alert('Error submitting interaction data. Please try again.');
+    }
+  });
+
+  // Validate form fields
+  function validateForm() {
+    const staffId = document.getElementById('staffId').value;
+    const staffName = document.getElementById('staffName').value;
+    const staffRole = document.getElementById('staffRole').value;
+    const staffDepartment = document.getElementById('staffDepartment').value;
+    const staffContactDetail = document.getElementById('staffContactDetail').value;
+    const visitDate = document.getElementById('visitDate').value;
+    const completionStatus = document.getElementById('completionStatus').value;
+    const organisationName = document.getElementById('organisationName').value;
+    const organisationAddress = document.getElementById('organisationAddress').value;
+    const organisationType = document.getElementById('organisationType').value;
+
+    if (!staffId || !staffName || !staffRole || !staffDepartment || !staffContactDetail || !visitDate || !completionStatus || !organisationName || !organisationAddress || !organisationType) {
+      return false;
+    }
+
+    if (!validateDate(visitDate)) {
+      alert('Invalid date format. Please use the format YYYY-MM-DD.');
+      return false;
+    }
+
+    if (!validateEmail(staffContactDetail)) {
+      alert('Invalid email address.');
+      return false;
+    }
+
+    return true;
+  }
+
+  // Validate date format (YYYY-MM-DD)
+  function validateDate(date) {
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    return regex.test(date);
+  }
+
+  // Validate email format
+  function validateEmail(email) {
+    const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+    return regex.test(email);
+  }
+
+</script>
