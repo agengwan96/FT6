@@ -1,7 +1,9 @@
+// Description: This file contains all the firebase scripts used in the website.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
     authDomain: "muworldv1-ft6.firebaseapp.com",
@@ -18,14 +20,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
-/* registerForm.addEventListener('submit', (e) => {
-    if (emailField.value === '' || passwordField === '' ||
-        emailField.value === null || passwordField === null ||
-        ValidateMurdochEmail() === false) {
-        e.preventDefault();
-    }
-}) */
-
+// registers a new user
 if(document.getElementById('registerSubmitButton') != null) {
     document.getElementById('registerSubmitButton').addEventListener('click', (e) => {
         e.preventDefault();
@@ -70,7 +65,7 @@ function storeUserInteractionDetails() {
     const orgType = document.getElementById("orgType").value;
     const dateSubmitted = new Date();
 
-    const docRef = addDoc(collection(db, "userInteractionDetails"), {
+    const docRef = addDoc(collection(db, "unverifiedInteractions"), {
         staffName: staffName,
         staffRole: staffRole,
         staffDepartment: staffDepartment,
@@ -82,13 +77,20 @@ function storeUserInteractionDetails() {
         orgAddress: orgAddress,
         orgType: orgType,
         dateSubmitted: dateSubmitted,
+    })
+    .then(() => {
+        alert("Your interaction details have been submitted for verification. You will be notified once your details have been verified.");
+        window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
     });
     console.log("Document written with ID: ", docRef.id);
 };
 
+// add event listener to ind int submit button
 if(document.getElementById('indIntSubmit') != null) {
-    document.getElementById('indIntSubmit').addEventListener('click', (e) => {
-        alert('test');
+    document.getElementById('indIntSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
         storeUserInteractionDetails();
     });
