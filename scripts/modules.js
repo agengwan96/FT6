@@ -25,32 +25,32 @@
     const loginPassword = document.getElementById('loginPassword');
   
     // Login Button Event Listener
-    document.getElementById('loginButton').addEventListener('click', (e) => {
-      e.preventDefault();
-          signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
-              .then((userCredential) => {
-                  // Signed in 
-                  const user = userCredential.user;
-                  
-                  // Update last login
-                  const lastLogin = new Date().toLocaleString();
-  
-                  update(ref(database, 'users/' + user.uid), {
-                      lastLogin: lastLogin
-                  });
-  
-                  alert('Login Successful');
-  
-                  window.location.href = './pages/dashboard.html';
-              })
-              .catch((error) => {
-                  const errorCode = error.code;
-                  const errorMessage = error.message;
-                  alert('Login Failed');
-              });
-    });
+    if (document.getElementById('loginButton') != null) {
+      document.getElementById('loginButton').addEventListener('click', (e) => {
+        e.preventDefault();
+            signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    
+                    // Update last login  
+                    update(ref(database, 'users/' + user.uid), {
+                        lastLogin: new Date().toLocaleString(),
+                    });
     
-
+                    // Alert success (remove later)
+                    alert('Login Successful');
+    
+                    // Redirect to dashboard
+                    window.location.href = './pages/dashboard.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert('Login Failed');
+                });
+    });
+  }
 
   // Get the current user
   onAuthStateChanged(auth, (user) => {
@@ -70,15 +70,17 @@
     }
   });
 
-  document.getElementById('logoutButton').addEventListener('click', (e) => {
-    e.preventDefault();
-    signOut(auth).then(() => {
-      // Sign-out successful.
-      alert('Logout Successful');
-      window.location.href = '../index.html';
-    }).catch((error) => {
-      // An error happened.
-      alert('Logout Failed');
+  // Logout Button Event Listener
+  if (document.getElementById('logoutButton') != null) {
+    document.getElementById('logoutButton').addEventListener('click', (e) => {
+      e.preventDefault();
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        alert('Logout Successful');
+        window.location.href = '../index.html';
+      }).catch((error) => {
+        // An error happened.
+        alert('Logout Failed');
+      });
     });
-  });
-  
+}
