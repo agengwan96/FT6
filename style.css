@@ -38,6 +38,10 @@ i:hover, a:hover{
   color: red;
 }
 
+button:hover{
+  cursor:pointer;
+}
+
 /*
   HEADER
 */
@@ -107,6 +111,7 @@ li {
   font-size: 20px;
   font-weight: 700;
   background-color: black;
+  border: none;
 }
 
 .btn__menu{
@@ -176,7 +181,7 @@ li {
   margin-bottom: 24px;
 }
 
-h2{
+h2, h3{
   text-align: center;
   margin-bottom: 24px;
 }
@@ -192,9 +197,10 @@ form{
   width: 100%;
 }
 
-input{
-  margin-bottom: 16px;
+input, select{
+  margin: 8px 0;
   padding: 4px 4px;
+  width: 100%;
 }
 
 .login{
@@ -267,6 +273,44 @@ i{
 #map{
   height: 508px;
   width: 100%;
+}
+
+/*
+  INDIVIDUAL INTERACTION
+*/
+#indSubmissionForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 16px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+#indIntForm{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.staff__details, .interaction__details, .organisation__details{
+  padding: 0 16px;
+  width: calc(100%/3);
+}
+
+#indIntSubmit{
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  margin-top: 24px;
+  font-weight: 700;
+  cursor:pointer;
 }
 
 /*
