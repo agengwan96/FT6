@@ -314,6 +314,33 @@ i{
 }
 
 /*
+  ADMIN PANEL
+*/
+#admin{
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+#panel{
+  margin-bottom: 16px;
+}
+
+.btn-primary{
+  background-color: blue;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 8px;
+}
+
+.btn-danger{
+  background-color: red;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 8px;
+}
+
+/*
   FOOTER
 */
 
