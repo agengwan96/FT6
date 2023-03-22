@@ -53,7 +53,7 @@ i:hover, a:hover{
 }
 
 .sub__title{
-  text-align: left;
+  text-align: center;
   font-size: 40pt;
 }
 
@@ -218,65 +218,55 @@ input{
   DASHBOARD
 */
 
-.dashboard--wrapper{
+#dashboard, #heatmap{
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 8px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard__icons{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 auto;
+  padding: 16px 32px;
   width: 100%;
-  max-width: 1080px;
 }
 
-#dashboard{
-  width: 80%;
-  padding: 0 8px;
+.icon__link{
+  width: calc(100%/3);
+  text-align: center;
+  margin: 24px 0;
 }
 
-fieldset{
-  height: 100vh;
-  width: 100%;
-  border-color: lightgray;
-  border-top: none;
-  border-bottom: none;
+i{
+  font-size: 200px;
+  color: red;
+}
+
+.icon__name{
+  color: black;
 }
 
 /*
-  USER SEARCH
+  HEATMAP
 */
 
-#user__search{
-  width: 20%;
-  min-width: 200px;
-  padding: 8px 16px;
-}
-
-.user__search--form{
+#heatmap{
   flex-direction: row;
-  margin-bottom: 0;
-  padding-bottom: 0;
+}
+
+.map__container{
   width: 100%;
+  max-width: 768px;
 }
 
-.user__search--title{
-  text-align: left;
-}
-
-.user__search--input{
-  width: 70%;
-  height: 30px;
-}
-
-.user__search--btn{
-  width: 30%;
-  height: 30px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 8%;
-}
-
-.user__search--results{
-  
+#map{
+  height: 508px;
+  width: 100%;
 }
 
 /*
@@ -287,7 +277,7 @@ footer{
   bottom: 0;
   background-color: black;
   height: 40px;
-  margin-top: 24px;
+  margin-top: auto;
 }
 
 .footer__text{
@@ -300,6 +290,14 @@ footer{
   .nav__link--anchor, .logout{
     font-size: 12px;
   }
+
+  #heatmap{
+    flex-direction: column;
+  }
+
+  h1{
+    font-size: 24px;
+  }
 }
 
 @media(max-width: 550px){
@@ -310,4 +308,96 @@ footer{
   .logout, .nav__link--list{
     display: none;
   }
+
+  h1{
+    font-size: 16px;
+  }
+}
+
+#unverifiedInteractionsTable{
+  display: block;
+  height: 400px;
+  overflow: auto;
+  border: 10px solid #000;
+  border-radius: 10px;
+  background-color: antiquewhite;
+}
+
+#unverifiedInteractionsTable table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#unverifiedInteractionsTable table tr{
+  border: 1px solid #000;
+}
+
+#unverifiedInteractionsTable table tr td{
+  border: 1px solid #000;
+  padding: 5px;
+}
+
+/* Staff name */
+#unverifiedInteractionsTable table tr td:nth-child(1){
+  width: 10%;
+}
+
+/* Staff role */
+#unverifiedInteractionsTable table tr td:nth-child(2){
+  width: 10%;
+}
+
+/* Staff email */
+#unverifiedInteractionsTable table tr td:nth-child(3){
+  width: 10%;
+}
+
+/* Staff contact */
+#unverifiedInteractionsTable table tr td:nth-child(4){
+  width: 10%;
+}
+
+/* Staff department */
+#unverifiedInteractionsTable table tr td:nth-child(5){
+  width: 10%;
+}
+
+/* Visit date */
+#unverifiedInteractionsTable table tr td:nth-child(6){
+  width: 8%;
+}
+
+/* Visit purpose */
+#unverifiedInteractionsTable table tr td:nth-child(7){
+  width: 15%;
+}
+
+/* Completion status */
+#unverifiedInteractionsTable table tr td:nth-child(8){
+  width: 5%;
+}
+
+/* Organisation name */
+#unverifiedInteractionsTable table tr td:nth-child(9){
+  width: 10%;
+}
+
+/* Organisation address */
+#unverifiedInteractionsTable table tr td:nth-child(10){
+  width: 10%;
+}
+
+/* Organisation type */
+#unverifiedInteractionsTable table tr td:nth-child(11){
+  width: 5%;
+}
+
+/* Verfiy */
+#unverifiedInteractionsTable table tr td:nth-child(12){
+  width: 5%;
+}
+
+/* Reject */
+#unverifiedInteractionsTable table tr td:nth-child(13){
+  width: 5%;
 }

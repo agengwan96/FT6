@@ -9,8 +9,14 @@
       src="https://kit.fontawesome.com/c8e4d183c2.js"
       crossorigin="anonymous"
     ></script>
-    <script src="./app.js" defer></script>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script src="../scripts/app.js" defer></script>
+    <script type="module" src="../scripts/modules.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="../style.css" />
+    <script
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqAqdB4PR0Hg2ISiZiCB2z7K0-Hmv0pwc&callback=initMap"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <nav>
@@ -34,11 +40,16 @@
             <a href="./mou.html" class="nav__link--anchor">MOU</a>
           </li>
         </ul>
-        <button class="logout">LogOut</button>
+        <button class="logout" id="logoutButton">LogOut</button>
       </div>
     </nav>
     <section id="heatmap">
-      <h1 class="sub__title"><span class="red">D\P</span>artner Location Heatmap</h1>
+      <h1 class="sub__title">
+        <span class="red">P</span>artner Location Heatmap
+      </h1>
+      <div class="map__container">
+        <div id="map"></div>
+      </div>
     </section>
     <footer>
       <p class="footer__text">MuWorld Copyright &#169; 2023</p>
