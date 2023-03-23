@@ -340,55 +340,11 @@ i{
   padding: 8px 8px;
 }
 
-/*
-  FOOTER
-*/
-
-footer{
-  bottom: 0;
-  background-color: black;
-  height: 40px;
-  margin-top: auto;
-}
-
-.footer__text{
-  color:white;
-  text-align: center;
-  padding: 8px 0;
-}
-
-@media(max-width: 768px){
-  .nav__link--anchor, .logout{
-    font-size: 12px;
-  }
-
-  #heatmap{
-    flex-direction: column;
-  }
-
-  h1{
-    font-size: 24px;
-  }
-}
-
-@media(max-width: 550px){
-  .btn__menu{
-    display: flex;
-  }
-
-  .logout, .nav__link--list{
-    display: none;
-  }
-
-  h1{
-    font-size: 16px;
-  }
-}
-
 #unverifiedInteractionsTable{
   display: block;
   height: 400px;
-  overflow: auto;
+  height: 1000px;
+  overflow:scroll;
   border: 10px solid #000;
   border-radius: 10px;
   background-color: antiquewhite;
@@ -472,3 +428,49 @@ footer{
 #unverifiedInteractionsTable table tr td:nth-child(13){
   width: 5%;
 }
+
+/*
+  FOOTER
+*/
+
+footer{
+  bottom: 0;
+  background-color: black;
+  height: 40px;
+  margin-top: auto;
+}
+
+.footer__text{
+  color:white;
+  text-align: center;
+  padding: 8px 0;
+}
+
+@media(max-width: 768px){
+  .nav__link--anchor, .logout{
+    font-size: 12px;
+  }
+
+  #heatmap{
+    flex-direction: column;
+  }
+
+  h1{
+    font-size: 24px;
+  }
+}
+
+@media(max-width: 550px){
+  .btn__menu{
+    display: flex;
+  }
+
+  .logout, .nav__link--list{
+    display: none;
+  }
+
+  h1{
+    font-size: 16px;
+  }
+}
+
