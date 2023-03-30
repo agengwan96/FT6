@@ -20,117 +20,96 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
+// Redirect to admin.html if user is admin
+async function checkAdmin() {
+    const user = auth.currentUser;
+    const userRef = doc(db, "users", user.uid);
+    const userDoc = await getDoc(userRef);
+    if (userDoc.data().role === "admin") {
+        window.location.href = './pages/admin.html';
+    }
+}
+
+function addClickListener(elementId, callback) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.addEventListener('click', callback);
+    }
+}
+
+addClickListener('adminPanel', async (e) => {
+    alert('admin panel');
+    await checkAdmin();
+});
+
 // registers a new user
-if(document.getElementById('registerSubmitButton') != null) {
-    document.getElementById('registerSubmitButton').addEventListener('click', (e) => {
-        e.preventDefault();
-        const emailVar = document.getElementById('emailRegisterField').value;
-        const passwordVar = document.getElementById('passwordRegisterField').value;
+addClickListener('registerSubmitButton', async (e) => {
+    e.preventDefault();
+    const emailVar = document.getElementById('emailRegisterField').value;
+    const passwordVar = document.getElementById('passwordRegisterField').value;
 
-        createUserWithEmailAndPassword(auth, emailVar, passwordVar)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            // ...
-            alert('successfully created acc');
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, emailVar, passwordVar);
+        const user = userCredential.user;
+        alert('Successfully created account');
+        await sendEmailVerification(user);
+        alert(`An email verification link has been sent to ${user.email}`);
+    } catch (error) {
+        alert(error.message);
+    }
+});
 
-            sendEmailVerification(user)
-            .then(() => {
-                // Email verification sent!
-                let msg = 'An email verification link has been sent to ' + user.email;
-                alert(msg);
-            });
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // ..
-            alert(errorMessage);
+// get user interaction details and store them in firebase cloud firestore
+addClickListener('indIntSubmit', async (e) => {
+    e.preventDefault();
+
+    const formData = {};
+    const fieldIds = ['staffName', 'staffRole', 'staffDepartment', 'staffContact', 'visitDate', 'visitPurpose', 'visitStatus', 'orgName', 'orgAddress', 'orgType'];
+
+    fieldIds.forEach(id => {
+        formData[id] = document.getElementById(id).value;
+    });
+
+    formData.dateSubmitted = new Date();
+
+    try {
+        const docRef = await addDoc(collection(db, "unverifiedInteractions"), formData);
+        alert("Your interaction details have been submitted for verification. You will be notified once your details have been verified.");
+        window.location.href = "dashboard.html";
+        console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+        console.error("Error adding document: ", error);
+    }
+});
+
+// create table for unverified interactions
+async function createUnverifiedInteractionsTable() {
+    const unverifiedInteractionsTableBody = document.getElementById('unverifiedInteractionsTableBody');
+    const querySnapshot = await getDocs(collection(db, "unverifiedInteractions"));
+    
+    querySnapshot.forEach((doc) => {
+        const rowData = doc.data();
+        console.log(doc.id, " => ", rowData);
+        let row = unverifiedInteractionsTableBody.insertRow();
+        
+        const fieldNames = ['staffName', 'staffRole', 'staffDepartment', 'staffContact', 'visitDate', 'visitPurpose', 'visitStatus', 'orgName', 'orgAddress', 'orgType', 'dateSubmitted'];
+        
+        fieldNames.forEach((fieldName, index) => {
+            let cell = row.insertCell(index);
+            cell.innerHTML = rowData[fieldName];
         });
+
+        let verifyButton = row.insertCell(11);
+        verifyButton.innerHTML = `<button class="btn btn-primary" onclick="verifyInteraction('${doc.id}')">Verify</button>`;
+        
+        let rejectButton = row.insertCell(12);
+        rejectButton.innerHTML = `<button class="btn btn-danger" onclick="rejectInteraction('${doc.id}')">Reject</button>`;
     });
 }
 
-// get user interaction details and store them in firebase cloud firestore
-function storeUserInteractionDetails() {
-    const staffName = document.getElementById("staffName").value;
-    const staffRole = document.getElementById("staffRole").value;
-    const staffDepartment = document.getElementById("staffDepartment").value;
-    const staffContact = document.getElementById("staffContact").value;
-    const visitDate = document.getElementById("visitDate").value;
-    const visitPurpose = document.getElementById("visitPurpose").value;
-    const visitStatus = document.getElementById("visitStatus").value;
-    const orgName = document.getElementById("orgName").value;
-    const orgAddress = document.getElementById("orgAddress").value;
-    const orgType = document.getElementById("orgType").value;
-    const dateSubmitted = new Date();
+addClickListener('unverifiedInteractionsTable', createUnverifiedInteractionsTable);
 
-    const docRef = addDoc(collection(db, "unverifiedInteractions"), {
-        staffName: staffName,
-        staffRole: staffRole,
-        staffDepartment: staffDepartment,
-        staffContact: staffContact,
-        visitDate: visitDate,
-        visitPurpose: visitPurpose,
-        visitStatus: visitStatus,
-        orgName: orgName,
-        orgAddress: orgAddress,
-        orgType: orgType,
-        dateSubmitted: dateSubmitted,
-    })
-    .then(() => {
-        alert("Your interaction details have been submitted for verification. You will be notified once your details have been verified.");
-        window.location.href = "dashboard.html";
-    })
-    .catch((error) => {
-        console.error("Error adding document: ", error);
-    });
-    console.log("Document written with ID: ", docRef.id);
-};
-
-// add event listener to ind int submit button
-if(document.getElementById('indIntSubmit') != null) {
-    document.getElementById('indIntSubmit').addEventListener('click', async (e) => {
-        e.preventDefault();
-        storeUserInteractionDetails();
-    });
-};
-
-// create table for unverified interactions
-if (document.getElementById('unverifiedInteractionsTable') != null) {
-    const unverifiedInteractionsTable = document.getElementById('unverifiedInteractionsTable');
-    const unverifiedInteractionsTableBody = document.getElementById('unverifiedInteractionsTableBody');
-    
-    const querySnapshot = await getDocs(collection(db, "unverifiedInteractions"));
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        let row = unverifiedInteractionsTableBody.insertRow();
-        let staffName = row.insertCell(0);
-        let staffRole = row.insertCell(1);
-        let staffDepartment = row.insertCell(2);
-        let staffContact = row.insertCell(3);
-        let visitDate = row.insertCell(4);
-        let visitPurpose = row.insertCell(5);
-        let visitStatus = row.insertCell(6);
-        let orgName = row.insertCell(7);
-        let orgAddress = row.insertCell(8);
-        let orgType = row.insertCell(9);
-        let dateSubmitted = row.insertCell(10);
-        let verifyButton = row.insertCell(11);
-        let rejectButton = row.insertCell(12);
-
-        staffName.innerHTML = doc.data().staffName;
-        staffRole.innerHTML = doc.data().staffRole;
-        staffDepartment.innerHTML = doc.data().staffDepartment;
-        staffContact.innerHTML = doc.data().staffContact;
-        visitDate.innerHTML = doc.data().visitDate;
-        visitPurpose.innerHTML = doc.data().visitPurpose;
-        visitStatus.innerHTML = doc.data().visitStatus;
-        orgName.innerHTML = doc.data().orgName;
-        orgAddress.innerHTML = doc.data().orgAddress;
-        orgType.innerHTML = doc.data().orgType;
-        dateSubmitted.innerHTML = doc.data().dateSubmitted;
-        verifyButton.innerHTML = '<button class="btn btn-primary" onclick="verifyInteraction(\'' + doc.id + '\')">Verify</button>';
-        rejectButton.innerHTML = '<button class="btn btn-danger" onclick="rejectInteraction(\'' + doc.id + '\')">Reject</button>';
-    });
-};
+// Loads table when page is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    createUnverifiedInteractionsTable();
+});

@@ -56,7 +56,7 @@
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
-      alert('User is signed in');
+      //alert('User is signed in');
 
       const userRef = ref(database, 'users/' + uid);
       onValue(userRef, (snapshot) => {
@@ -66,7 +66,7 @@
       
     } else {
       // User is signed out
-      alert('User is not signed in');
+      //alert('User is not signed in');
     }
   });
 

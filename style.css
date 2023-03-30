@@ -318,7 +318,7 @@ i{
 */
 #admin{
   width: 100%;
-  max-width: 1080px;
+  max-width: 95%;
   margin: 0 auto;
 }
 
@@ -327,6 +327,7 @@ i{
 }
 
 .btn-primary{
+  color: aliceblue;
   background-color: blue;
   border: none;
   border-radius: 8px;
@@ -334,6 +335,7 @@ i{
 }
 
 .btn-danger{
+  color: aliceblue;
   background-color: red;
   border: none;
   border-radius: 8px;
@@ -342,8 +344,7 @@ i{
 
 #unverifiedInteractionsTable{
   display: block;
-  height: 400px;
-  height: 1000px;
+  height: 700px;
   overflow:scroll;
   border: 10px solid #000;
   border-radius: 10px;

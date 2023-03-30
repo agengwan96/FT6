@@ -6,6 +6,7 @@ const emailField = document.getElementById('emailTextField');
 const passwordField = document.getElementById('passwordTextField');
 let map;
 let addr;
+
 /*location object containing coordinates of country and count*/
 let locations = {
     lati: 0,
@@ -18,7 +19,7 @@ let heatArr = [];
     Validates email to be an @murdoch.edu.au domain using regex 
 */
 function ValidateMurdochEmail() {
-    var mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
+    const mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
     if (emailField.value.match(mailformat)) {
         alert("VALID EMAIL");
         return true;
@@ -27,16 +28,6 @@ function ValidateMurdochEmail() {
     emailField.focus();
     return false;
 }
-
-/* Listener for form. Calls ValidateMurdochEmail() function and checks for authentcity.
-   Need to modify this for authenticating with Firebase. */
-/* form.addEventListener('submit', (e) => {
-    if (emailField.value === '' || passwordField === '' ||
-        emailField.value === null || passwordField === null ||
-        ValidateMurdochEmail() === false) {
-        e.preventDefault();
-    }
-}) */
 
 /* 
     Mobile menu functions 
@@ -55,8 +46,7 @@ function closeMenu(){
     *initiate google maps
 */
 function initMap(){
-    map = new google.maps.Map(document.getElementById("map"), {center: {lat: 1.3421, lng: 103.9198}, 
-    zoom: 2, });
+    map = new google.maps.Map(document.getElementById("map"), {center: {lat: 1.3421, lng: 103.9198}, zoom: 2 });
 }
 
 window.initMap = initMap;
@@ -89,20 +79,10 @@ function geocode(addr){
     *applies a heatmap layer over the map
 */
 function heatmap(l){
-    let heatmapData = [];
-
-    let ind = l.length;
-    console.log(ind);
-
-    for(let i = 0;i < ind;i++){
-        heatmapData.push({location: new google.maps.LatLng(l[i].lati, l[i].long)});
-    }
-
-    let heatmap = new google.maps.visualization.HeatmapLayer({
-        data: heatmapData
-    });
+    const heatmapData = l.map(({ lati, long }) => ({ location: new google.maps.LatLng(lati, long) }));
+    const heatmap = new google.maps.visualization.HeatmapLayer({ data: heatmapData });
     heatmap.setMap(map);
 }
 
 geocode("Australia");
-geocode("Singapoe");
+geocode("Singapore");
