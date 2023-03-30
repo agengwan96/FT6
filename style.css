@@ -223,6 +223,13 @@ input, select{
 /*
   DASHBOARD
 */
+#welcome__user{
+  font-size: 40px;
+}
+
+#userName{
+  font-size: 30px;
+}
 
 #dashboard, #heatmap{
   width: 100%;
@@ -459,9 +466,25 @@ footer{
   h1{
     font-size: 24px;
   }
+
+  i{
+    font-size: 150px;
+  }
 }
 
 @media(max-width: 550px){
+  i{
+    font-size: 100px;
+  }
+
+  .icon__link{
+    width: 50%;
+  }
+
+  .icon__name{
+    font-size: 10px;
+  }
+
   .btn__menu{
     display: flex;
   }
@@ -473,5 +496,17 @@ footer{
   h1{
     font-size: 16px;
   }
+
+  #welcome__user{
+    font-size: 25px;
+  }
+
+  #userName{
+    font-size: 20px;
+  }
+
+  .logout__d{
+    display: flex;
+  }  
 }
 

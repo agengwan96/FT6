@@ -17,34 +17,12 @@
     <nav>
       <div class="nav__container">
         <h1 class="logo red">MU<span class="world">WORLD</span></h1>
-        <button class="logout" id="logoutButton">LogOut</button>
-        <button onclick="openMenu()" class="btn__menu">
-          <i class="fas fa-bars"></i>
-        </button>
-        <div class="menu__backdrop">
-          <button onclick="closeMenu()" class="btn__menu btn__menu--close">
-            <i class="fas fa-times"></i>
-          </button>
-          <ul class="menu__links">
-            <li class="menu__list">
-              <a onclick="closeMenu()" class="menu__link" href="./heatmap.html">Heatmap</a>
-            </li>
-            <li class="menu__list">
-              <a onclick="closeMenu()" class="menu__link" href="./indiv_interaction.html">Ind. Interaction</a>
-            </li>
-            <li class="menu__list">
-              <a class="menu__link" href="./mou.html">MOU</a>
-            </li>
-            <li class="menu__list">
-              <a class="menu__link">LogOut</a>
-            </li>
-          </ul>
-        </div>
+        <button class="logout logout__d" id="logoutButton">Log Out</button>
       </div>
     </nav>
     <section id="dashboard">
-      <h1 style="font-size: 40px;">Welcome</h1>
-      <h1 style="font-size: 30px;" id="userName"></h1>
+      <h1 id="welcome__user">Welcome</h1>
+      <h1 id="userName"></h1>
       <h1 class="sub__title"><span class="red">D</span>ashboard</h1>
       <div class="dashboard__icons">
         <a class="icon__link" href="./indiv_interaction.html"
@@ -59,7 +37,7 @@
         <a class="icon__link" href="./mou.html"
           ><i class="fa-solid fa-m"></i>
           <h3 class="icon__name">MOU</h3></a>
-        <a class="icon__link" id="adminPanel"
+        <a class="icon__link" id="adminPanel" href="./admin.html"
           ><i class="fa-solid fa-lock"></i>
           <h3 class="icon__name">Admin Panel</h3></a>
       </div>
