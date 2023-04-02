@@ -34,6 +34,14 @@
     <section id="mou">
       <h1 class="sub__title"><span class="red">M</span>OU</h1>
     </section>
+    <div id="drop-area">
+      <form class="my-form">
+        <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
+        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+        <label class="button" for="fileElem">Select some files</label>
+      </form>
+    </div>
+    
     <footer>
       <p class="footer__text">MuWorld Copyright &#169; 2023</p>
     </footer>

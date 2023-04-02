@@ -81,6 +81,7 @@
 
     /* Regex for checking if its a school domain */
     var mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
+    var mailformat2 = /^\w+([\.-]?\w+)*@student.murdoch.edu.au+$/;
 
     /* Checks for empty fields */
     if (emailVar === '' || passwordVar === '' ||
@@ -90,8 +91,8 @@
         }
 
     /* Validates email to be an @murdoch.edu.au domain using regex */
-    if (!emailVar.match(mailformat)) {
-      alert('Invalid email address! Please enter a @murdoch.edu.au domain email');
+    if (!emailVar.match(mailformat) && !emailVar.match(mailformat2)) {
+      alert('Invalid email address! Please enter a @murdoch.edu.au or @student.murdoch.edu.au domain email');
       emailVar.focus();
       return true;  // Returns if its a invalid domain
     }
