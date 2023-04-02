@@ -19,9 +19,9 @@ body{
 .row{
   display: flex;
   justify-content: space-around;
-  width: 100%;
-  max-width: 900px;
   margin: 0 auto;
+  width: 100%;
+  max-width:1090px;
 }
 
 a {
@@ -168,11 +168,6 @@ li {
   INDEX
 */
 
-.home{
-  width: 100%;
-  max-width: 1080px;
-}
-
 .welcome{
   text-align: center;
   padding-top: 30px;
@@ -195,11 +190,12 @@ form{
   flex-direction: column;
   justify-content: space-evenly;
   width: 100%;
-  max-width: 400px;
 }
 
 .form__container{
   width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 input, select{
