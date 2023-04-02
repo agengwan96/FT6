@@ -363,6 +363,11 @@ i{
   border-collapse: collapse;
 }
 
+td{
+  width: 100%;
+  white-space: nowrap;
+}
+
 #unverifiedInteractionsTable table tr{
   border: 1px solid #000;
 }
