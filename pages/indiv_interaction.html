@@ -65,22 +65,22 @@
         <div class="staff__details">
           <h3>Staff Details</h3>
           <label for="staffName">Name</label>
-          <input type="text" placeholder="Name" id="staffName"/>
+          <input type="text" placeholder="Name" id="staffName" required/>
           <label for="staffRole">Role</label>
-          <input type="text" placeholder="Role" id="staffRole"/>
+          <input type="text" placeholder="Role" id="staffRole" required/>
           <label for="staffDepartment">Department</label>
-          <input type="text" placeholder="Department" id="staffDepartment"/>
-          <label for="staffContact">Contact details</label>
-          <input type="text" placeholder="Contact details" id="staffContact"/>
+          <input type="text" placeholder="Department" id="staffDepartment" required/>
+          <label for="staffContact">Contact email</label>
+          <input type="text" placeholder="Contact email" id="staffContact" required/>
         </div>
         <div class="interaction__details">
           <h3>Interaction Details</h3>
           <label for="visitDate">Date of visit</label>
-          <input type="date" placeholder="Visit date" id="visitDate"/>
+          <input type="date" placeholder="Visit date" id="visitDate" required/>
           <label for="visitPurpose">Purpose of visit</label>
-          <input type="text" placeholder="Purpose of visit" id="visitPurpose"/>
+          <input type="text" placeholder="Purpose of visit" id="visitPurpose" required/>
           <label for="visitStatus">Completion status</label>
-          <select name="visitStatus" id="visitStatus">
+          <select name="visitStatus" id="visitStatus" required>
             <option value="scheduled">Scheduled</option>
             <option value="completed">Completed</option>
             <option value="cancelled">Cancelled</option>
@@ -89,11 +89,11 @@
         <div class="organisation__details">
           <h3>Organisation Details</h3>
           <label for="orgName">Name</label>
-          <input type="text" placeholder="Name" id="orgName"/>
+          <input type="text" placeholder="Name" id="orgName" required/>
           <label for="orgAddress">Address</label>
-          <input type="text" placeholder="Address" id="orgAddress"/>
+          <input type="text" placeholder="Address" id="orgAddress" required/>
           <label for="orgType">Organisation type</label>
-          <input type="text" placeholder="Organisation type" id="orgType"/>
+          <input type="text" placeholder="Organisation type" id="orgType" required/>
           <input type="submit" value="Submit" id="indIntSubmit"/>
         </div>
       </form>
