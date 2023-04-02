@@ -164,10 +164,14 @@ li {
   color: red;
 }
 
-
 /*
   INDEX
 */
+
+.home{
+  width: 100%;
+  max-width: 1080px;
+}
 
 .welcome{
   text-align: center;
@@ -190,7 +194,8 @@ form{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .form__container{
@@ -218,6 +223,10 @@ input, select{
 .reg__para, .reset__para, .alr__para{
   text-align: center;
   margin-top: 16px;
+}
+
+.staff{
+  margin-bottom: 30px;
 }
 
 /*
@@ -478,6 +487,10 @@ footer{
 }
 
 @media(max-width: 550px){
+  .welcome, .muworld{
+    font-size: 48px;
+  }
+
   i{
     font-size: 100px;
   }
@@ -501,6 +514,7 @@ footer{
   h1{
     font-size: 16px;
   }
+
 
   #welcome__user{
     font-size: 25px;
