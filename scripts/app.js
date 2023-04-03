@@ -1,9 +1,26 @@
+// Description: This file contains all the firebase scripts used in the website.
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
+    authDomain: "muworldv1-ft6.firebaseapp.com",
+    databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "muworldv1-ft6",
+    storageBucket: "muworldv1-ft6.appspot.com",
+    messagingSenderId: "659133217389",
+    appId: "1:659133217389:web:386e36e80f023670421d64",
+    measurementId: "G-BQJCVKPBJN"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 /* 
     Variables 
 */
-const form = document.getElementById('loginForm');
-const emailField = document.getElementById('emailTextField');
-const passwordField = document.getElementById('passwordTextField');
 let map;
 let addr;
 
@@ -12,22 +29,9 @@ let locations = {
     lati: 0,
     long: 0,
 };
+
 /*array that wil contain locations object*/
 let heatArr = [];
-
-/* 
-    Validates email to be an @murdoch.edu.au domain using regex 
-*/
-function ValidateMurdochEmail() {
-    const mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
-    if (emailField.value.match(mailformat)) {
-        alert("VALID EMAIL");
-        return true;
-    }
-    alert("INVALID EMAIL");
-    emailField.focus();
-    return false;
-}
 
 /* 
     Mobile menu functions 
@@ -86,3 +90,17 @@ function heatmap(l){
 
 geocode("Australia");
 geocode("Singapore");
+
+// fetches all countries from firebase and calls geocode function
+function fetchCountriesAndCallGeocode(){
+    const countryRef = collection(db, 'unverifiedInteractions');
+    const querySnapshot = getDocs(countryRef);
+    querySnapshot.then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            geocode(doc.data().orgAddress);
+        });
+    });
+}
+
+// Calls the function to fetch countries and call geocode
+fetchCountriesAndCallGeocode();

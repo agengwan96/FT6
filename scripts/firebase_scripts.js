@@ -172,7 +172,6 @@ async function rejectInteraction(docId) {
     }
 };
 
-// 
 addClickListener('unverifiedInteractionsTable', createUnverifiedInteractionsTable);
 
 // Loads table when page is loaded
