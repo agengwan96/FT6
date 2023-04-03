@@ -1,7 +1,7 @@
 // Description: This file contains all the firebase scripts used in the website.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, doc, getDocs } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, getDocs, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -62,6 +62,10 @@ addClickListener('registerSubmitButton', async (e) => {
 // get user interaction details and store them in firebase cloud firestore
 addClickListener('indIntSubmit', async (e) => {
     e.preventDefault();
+    if (document.getElementById('staffName').value === '' || document.getElementById('staffRole').value === '' || document.getElementById('staffDepartment').value === '' || document.getElementById('staffContact').value === '' || document.getElementById('visitDate').value === '' || document.getElementById('visitPurpose').value === '' || document.getElementById('visitStatus').value === '' || document.getElementById('orgName').value === '' || document.getElementById('orgAddress').value === '' || document.getElementById('orgType').value === '') {
+        alert('Please fill in all the fields');
+        return;
+    }
 
     const formData = {};
     const fieldIds = ['staffName', 'staffRole', 'staffDepartment', 'staffContact', 'visitDate', 'visitPurpose', 'visitStatus', 'orgName', 'orgAddress', 'orgType'];
@@ -149,25 +153,33 @@ async function createUnverifiedInteractionsTable() {
 // Upon verfiying an interaction, move it to the verified interactions collection
 /* WIP */
 async function verifyInteraction(docId) {
+    alert('Verifying interaction...');
     const docRef = doc(db, "unverifiedInteractions", docId);
-    const docSnap = await getDoc(docRef);
   
-    if (docSnap.exists()) {
-      const docData = docSnap.data();
-      try {
-        await setDoc(doc(db, "verifiedInteractions", docId), docData);
-        await deleteDoc(docRef);
-        alert('Interaction has been verified');
-        window.location.href = 'admin.html';
-      } catch (error) {
-        console.error("Error adding document: ", error);
-        alert('Error verifying interaction');
+    try {
+      const docSnap = await getDoc(docRef);
+  
+      if (docSnap.exists()) {
+        const docData = docSnap.data();
+        try {
+          await setDoc(doc(db, "verifiedInteractions", docId), docData);
+          await deleteDoc(docRef);
+          alert('Interaction has been verified');
+          window.location.href = 'admin.html';
+        } catch (error) {
+          console.error("Error adding document: ", error);
+          alert('Error verifying interaction');
+        }
+      } else {
+        console.log("No such document!");
+        alert('Error: Document not found');
       }
-    } else {
-      console.log("No such document!");
-      alert('Error: Document not found');
+    } catch (error) {
+      console.error("Error getting document: ", error);
+      alert('Error: Unable to retrieve the document');
     }
   }
+  
 
 // Upon rejecting an interaction, move it to the rejected interactions collection
 function rejectInteraction(docId) {
