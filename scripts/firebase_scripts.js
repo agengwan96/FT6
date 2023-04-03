@@ -131,34 +131,48 @@ async function createUnverifiedInteractionsTable() {
         });
 
         let verifyButton = row.insertCell(11);
-        verifyButton.innerHTML = `<button class="btn btn-primary" onclick="verifyInteraction('${id}')">Verify</button>`;
+        const button1 = document.createElement('button');
+        button1.innerText = 'Verify';
+        button1.className = 'btn btn-success';
+        button1.onclick = () => verifyInteraction(id);
+        verifyButton.appendChild(button1);
 
         let rejectButton = row.insertCell(12);
-        rejectButton.innerHTML = `<button class="btn btn-danger" onclick="rejectInteraction('${id}')">Reject</button>`;
+        const button2 = document.createElement('button');
+        button2.innerText = 'Reject';
+        button2.className = 'btn btn-success';
+        button2.onclick = () => rejectInteraction(id);
+        rejectButton.appendChild(button2);
     });
 }
-
 
 // Upon verfiying an interaction, move it to the verified interactions collection
 /* WIP */
 async function verifyInteraction(docId) {
     const docRef = doc(db, "unverifiedInteractions", docId);
     const docSnap = await getDoc(docRef);
-    const docData = docSnap.data();
-    try {
+  
+    if (docSnap.exists()) {
+      const docData = docSnap.data();
+      try {
         await setDoc(doc(db, "verifiedInteractions", docId), docData);
         await deleteDoc(docRef);
         alert('Interaction has been verified');
         window.location.href = 'admin.html';
-    } catch (error) {
+      } catch (error) {
         console.error("Error adding document: ", error);
         alert('Error verifying interaction');
+      }
+    } else {
+      console.log("No such document!");
+      alert('Error: Document not found');
     }
-};
+  }
 
 // Upon rejecting an interaction, move it to the rejected interactions collection
-async function rejectInteraction(docId) {
-    const docRef = doc(db, "unverifiedInteractions", docId);
+function rejectInteraction(docId) {
+    alert('Interaction has been rejected');
+    /* const docRef = doc(db, "unverifiedInteractions", docId);
     const docSnap = await getDoc(docRef);
     const docData = docSnap.data();
     try {
@@ -169,12 +183,8 @@ async function rejectInteraction(docId) {
     } catch (error) {
         console.error("Error adding document: ", error);
         alert('Error rejecting interaction');
-    }
+    } */
 };
 
-addClickListener('unverifiedInteractionsTable', createUnverifiedInteractionsTable);
-
 // Loads table when page is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    createUnverifiedInteractionsTable();
-});
+createUnverifiedInteractionsTable();
