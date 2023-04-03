@@ -16,14 +16,6 @@ body{
   flex-direction: column;
 }
 
-.row{
-  display: flex;
-  justify-content: space-around;
-  margin: 0 auto;
-  width: 100%;
-  max-width:1090px;
-}
-
 a {
   text-decoration: none;
   position: relative;
@@ -167,11 +159,9 @@ li {
 /*
   INDEX
 */
-
 .welcome{
   text-align: center;
-  padding-top: 30px;
-  font-size: 50pt;
+  font-size: 55pt;
 }
 
 .muworld{
@@ -188,14 +178,15 @@ h2, h3{
 form{
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
 }
 
 .form__container{
   width: 100%;
-  max-width: 500px;
   margin: 0 auto;
+  max-width: 400px;
+  padding: 0 16px;
 }
 
 input, select{
@@ -228,12 +219,9 @@ input, select{
 /*
   DASHBOARD
 */
-#welcome__user{
-  font-size: 40px;
-}
 
 #userName{
-  font-size: 30px;
+  color: maroon;
 }
 
 #dashboard, #heatmap{
