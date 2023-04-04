@@ -9,8 +9,6 @@
       src="https://kit.fontawesome.com/77d0d98c1f.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../scripts/app.js" defer></script>
-    <script type="module" src="../scripts/firebase_scripts.js" defer></script>
     <script type="module" src="../scripts/modules.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../style.css"/>
   </head>
@@ -41,8 +39,8 @@
         <a class="icon__link" href="./status.html"
           ><i class="fa-solid fa-s"></i>
           <h3 class="icon__name">Check Status</h3></a>
-        <a class="icon__link" id="adminPanel" href="./admin.html"
-          ><i class="fa-solid fa-lock"></i>
+        <a class="icon__link" id="adminPanel" href="./admin.html"  style="display: none;"
+          ><i class="fa-solid fa-lock" style="display: none;" id="adminPanelLock"></i>
           <h3 class="icon__name">Admin Panel</h3></a>
       </div>
     </section>

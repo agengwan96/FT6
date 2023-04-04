@@ -38,7 +38,6 @@ function addClickListener(elementId, callback) {
 }
 
 addClickListener('adminPanel', async (e) => {
-    alert('admin panel');
     await checkAdmin();
 });
 
@@ -151,51 +150,61 @@ async function createUnverifiedInteractionsTable() {
 }
 
 // Upon verfiying an interaction, move it to the verified interactions collection
-/* WIP */
 async function verifyInteraction(docId) {
     alert('Verifying interaction...');
     const docRef = doc(db, "unverifiedInteractions", docId);
-  
+
     try {
-      const docSnap = await getDoc(docRef);
-  
-      if (docSnap.exists()) {
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
         const docData = docSnap.data();
         try {
-          await setDoc(doc(db, "verifiedInteractions", docId), docData);
-          await deleteDoc(docRef);
-          alert('Interaction has been verified');
-          window.location.href = 'admin.html';
+            await setDoc(doc(db, "verifiedInteractions", docId), docData);
+            await deleteDoc(docRef);
+            alert('Interaction has been verified');
+            window.location.href = 'admin.html';
         } catch (error) {
-          console.error("Error adding document: ", error);
-          alert('Error verifying interaction');
+            console.error("Error adding document: ", error);
+            alert('Error verifying interaction');
         }
-      } else {
+        } else {
         console.log("No such document!");
         alert('Error: Document not found');
-      }
+        }
     } catch (error) {
-      console.error("Error getting document: ", error);
-      alert('Error: Unable to retrieve the document');
+        console.error("Error getting document: ", error);
+        alert('Error: Unable to retrieve the document');
     }
-  }
-  
+};
 
 // Upon rejecting an interaction, move it to the rejected interactions collection
-function rejectInteraction(docId) {
-    alert('Interaction has been rejected');
-    /* const docRef = doc(db, "unverifiedInteractions", docId);
-    const docSnap = await getDoc(docRef);
-    const docData = docSnap.data();
+async function rejectInteraction(docId) {
+    alert('Rejecting interaction...');
+    const docRef = doc(db, "unverifiedInteractions", docId);
+    
     try {
-        await setDoc(doc(db, "rejectedInteractions", docId), docData);
-        await deleteDoc(docRef);
-        alert('Interaction has been rejected');
-        window.location.href = 'admin.html';
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+        const docData = docSnap.data();
+        try {
+            await setDoc(doc(db, "rejectedInteractions", docId), docData);
+            await deleteDoc(docRef);
+            alert('Interaction has been rejected');
+            window.location.href = 'admin.html';
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            alert('Error rejecting interaction');
+        }
+        } else {
+        console.log("No such document!");
+        alert('Error: Document not found');
+        }
     } catch (error) {
-        console.error("Error adding document: ", error);
-        alert('Error rejecting interaction');
-    } */
+        console.error("Error getting document: ", error);
+        alert('Error: Unable to retrieve the document');
+    }
 };
 
 // Loads table when page is loaded

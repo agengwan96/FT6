@@ -163,7 +163,9 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+// Gets admin properties
 const adminLink = document.getElementById('adminPanel');
+const adminLinkLock = document.getElementById('adminPanelLock');
 
 // Check if user is admin
 onAuthStateChanged(auth, (user) => {
@@ -174,8 +176,7 @@ onAuthStateChanged(auth, (user) => {
       const data = snapshot.val();
       if (data.role == 'admin') {
         adminLink.style.display = 'block';
-      } else {
-        adminLink.style.display = 'none';
+        adminLinkLock.style.display = 'block';
       }
     });
   }

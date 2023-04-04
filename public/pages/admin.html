@@ -9,7 +9,6 @@
       src="https://kit.fontawesome.com/c8e4d183c2.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../scripts/app.js" defer></script>
     <script type="module" src="../scripts/firebase_scripts.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../style.css" />  </head>
   <body>
@@ -24,38 +23,47 @@
           </li>
           </li>
           <li class="nav__link">
-            <a href="./org_interaction.html" class="nav__link--anchor">Org. Interaction</a>
+            <a href="./indiv_interaction.html" class="nav__link--anchor">Ind. Interaction</a>
           </li>
           <li class="nav__link">
             <a href="./mou.html" class="nav__link--anchor">MOU</a>
           </li>
         </ul>
-        <button class="logout" id="logoutButton">LogOut</button>
+        <button class="logout" id="logoutButton">Log Out</button>
       </div>
     </nav>
-    <section id="ind_interaction">
+    <div id="admin">
       <h1 class="sub__title"><span class="red">A</span>dmin Panel</h1>
-    </section>
-    <section id="indSubmissionForm">
-      <h2>Verify and submit data here</h2>
+    <section id="panel">
+      <h3>Verify and Submit data here</h2>
       <div id="unverifiedInteractionsTable">
         <table id="unverifiedInteractionsTableBody">
           <tr>
             <th>Staff Name</th>
             <th>Staff Role</th>
-            <th>Staff Email</th>
-            <th>Staff Contact</th>
             <th>Staff Department</th>
+            <th>Staff Contact</th>
             <th>Visit Date</th>
             <th>Visit Purpose</th>
             <th>Status</th>
             <th>Org Name</th>
             <th>Org Address</th>
             <th>Org type</th>
+            <th id="dateSubmitted">Date Submitted</th>
+            <th colspan="2">Submit</th>
           </tr>
         </table>
       </div>
     </section>
+
+    <section id="legend">
+      <h3>Legend</h3>
+      <p>
+        Dates are displayed in the form of <span class="red">DD/MM/YYYY</span>
+      </p>
+        
+    </section>
+    </div>
     <footer>
       <p class="footer__text">MuWorld Copyright &#169; 2023</p>
     </footer>

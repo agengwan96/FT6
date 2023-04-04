@@ -11,6 +11,7 @@
     ></script>
     <script src="../scripts/app.js" defer></script>
     <script type="module" src="../scripts/firebase_scripts.js" defer></script>
+    <script type="module" src="../scripts/modules.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../style.css" />  </head>
   <body>
     <nav>
@@ -24,13 +25,35 @@
           </li>
           </li>
           <li class="nav__link">
-            <a href="./org_interaction.html" class="nav__link--anchor">Org. Interaction</a>
-          </li>
-          <li class="nav__link">
             <a href="./mou.html" class="nav__link--anchor">MOU</a>
           </li>
+          <li class="nav__link">
+            <a href="./admin.html" class="nav__link--anchor">Admin Panel</a>
+          </li>
         </ul>
-        <button class="logout" id="logoutButton">LogOut</button>
+        <button class="logout" id="logoutButton">Log Out</button>
+        <button onclick="openMenu()" class="btn__menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu__backdrop">
+          <button onclick="closeMenu()" class="btn__menu btn__menu--close">
+            <i class="fas fa-times"></i>
+          </button>
+          <ul class="menu__links">
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./heatmap.html">Heatmap</a>
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./indiv_interaction.html">Ind. Interaction</a>
+            </li>
+            <li class="menu__list">
+              <a class="menu__link" href="./mou.html">MOU</a>
+            </li>
+            <li class="menu__list">
+              <button class="logout" id="logoutButton">Log Out</button>>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
     <section id="ind_interaction">
@@ -39,34 +62,40 @@
     <section id="indSubmissionForm">
       <h2>Submit details here</h2>
       <form id="indIntForm">
-        <h3>Staff details</h3>
-        <label for="staffName">Name</label>
-        <input type="text" placeholder="Name" id="staffName"/>
-        <label for="staffRole">Role</label>
-        <input type="text" placeholder="Role" id="staffRole"/>
-        <label for="staffDepartment">Department</label>
-        <input type="text" placeholder="Department" id="staffDepartment"/>
-        <label for="staffContact">Contact details</label>
-        <input type="text" placeholder="Contact details" id="staffContact"/>
-        <h3>Interaction details</h3>
-        <label for="visitDate">Date of visit</label>
-        <input type="date" placeholder="Visit date" id="visitDate"/>
-        <label for="visitPurpose">Purpose of visit</label>
-        <input type="text" placeholder="Purpose of visit" id="visitPurpose"/>
-        <label for="visitStatus">Completion status</label>
-        <select name="visitStatus" id="visitStatus">
-          <option value="scheduled">Scheduled</option>
-          <option value="completed">Completed</option>
-          <option value="cancelled">Cancelled</option>
-        </select>
-        <h3>Organisation Details</h3>
-        <label for="orgName">Name</label>
-        <input type="text" placeholder="Name" id="orgName"/>
-        <label for="orgAddress">Address</label>
-        <input type="text" placeholder="Address" id="orgAddress"/>
-        <label for="orgType">Organisation type</label>
-        <input type="text" placeholder="Organisation type" id="orgType"/>
-        <input type="submit" value="Submit" id="indIntSubmit"/>
+        <div class="staff__details">
+          <h3>Staff Details</h3>
+          <label for="staffName">Name</label>
+          <input type="text" placeholder="Name" id="staffName" required/>
+          <label for="staffRole">Role</label>
+          <input type="text" placeholder="Role" id="staffRole" required/>
+          <label for="staffDepartment">Department</label>
+          <input type="text" placeholder="Department" id="staffDepartment" required/>
+          <label for="staffContact">Contact email</label>
+          <input type="text" placeholder="Contact email" id="staffContact" required/>
+        </div>
+        <div class="interaction__details">
+          <h3>Interaction Details</h3>
+          <label for="visitDate">Date of visit</label>
+          <input type="date" placeholder="Visit date" id="visitDate" required/>
+          <label for="visitPurpose">Purpose of visit</label>
+          <input type="text" placeholder="Purpose of visit" id="visitPurpose" required/>
+          <label for="visitStatus">Completion status</label>
+          <select name="visitStatus" id="visitStatus" required>
+            <option value="scheduled">Scheduled</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="organisation__details">
+          <h3>Organisation Details</h3>
+          <label for="orgName">Name</label>
+          <input type="text" placeholder="Name" id="orgName" required/>
+          <label for="orgAddress">Address</label>
+          <input type="text" placeholder="Address" id="orgAddress" required/>
+          <label for="orgType">Organisation type</label>
+          <input type="text" placeholder="Organisation type" id="orgType" required/>
+          <input type="submit" value="Submit" id="indIntSubmit"/>
+        </div>
       </form>
       
     </section>
