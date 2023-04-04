@@ -136,14 +136,14 @@ async function createUnverifiedInteractionsTable() {
         let verifyButton = row.insertCell(11);
         const button1 = document.createElement('button');
         button1.innerText = 'Verify';
-        button1.className = 'btn btn-success';
+        button1.className = 'btn btn-success btn-primary';
         button1.onclick = () => verifyInteraction(id);
         verifyButton.appendChild(button1);
 
         let rejectButton = row.insertCell(12);
         const button2 = document.createElement('button');
         button2.innerText = 'Reject';
-        button2.className = 'btn btn-success';
+        button2.className = 'btn btn-success btn-danger';
         button2.onclick = () => rejectInteraction(id);
         rejectButton.appendChild(button2);
     });

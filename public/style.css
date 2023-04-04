@@ -10,7 +10,7 @@ html {
   scroll-behavior: smooth;
 }
 
-body{
+body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,38 +22,39 @@ a {
   transition: opacity 300ms ease;
 }
 
-i:hover, a:hover{
+i:hover,
+a:hover {
   opacity: 0.7;
 }
 
-.red{
+.red {
   color: red;
 }
 
-button:hover{
-  cursor:pointer;
+button:hover {
+  cursor: pointer;
 }
 
 /*
   HEADER
 */
 
-.header{
+.header {
   background-color: black;
   height: 50px;
 }
 
-.title{
+.title {
   padding: 10px 0;
   text-align: center;
 }
 
-.sub__title{
+.sub__title {
   text-align: center;
   font-size: 40pt;
 }
 
-.world{
+.world {
   color: white;
 }
 
@@ -62,9 +63,10 @@ button:hover{
 */
 
 nav {
-  width: 100%;;
+  width: 100%;
   height: 50px;
-  display: flex;  margin-bottom: 24px;
+  display: flex;
+  margin-bottom: 24px;
   background-color: black;
 }
 
@@ -98,7 +100,7 @@ li {
   list-style-type: none;
 }
 
-.logout{
+.logout {
   color: whitesmoke;
   font-size: 20px;
   font-weight: 700;
@@ -106,7 +108,7 @@ li {
   border: none;
 }
 
-.btn__menu{
+.btn__menu {
   display: none;
   background-color: transparent;
   font-size: 40px;
@@ -132,7 +134,7 @@ li {
   transition: all 300ms ease;
 }
 
-.btn__menu--close{
+.btn__menu--close {
   position: absolute;
   top: 10px;
   right: 20px;
@@ -148,54 +150,58 @@ li {
   overflow: hidden;
 }
 
-.menu__link{
+.menu__link {
   padding: 16px 0;
 }
 
-.nav__link--anchor:hover, .menu__link:hover, i:hover{
+.nav__link--anchor:hover,
+.menu__link:hover,
+i:hover {
   color: red;
 }
 
 /*
   INDEX
 */
-.welcome{
+.welcome {
   text-align: center;
   font-size: 55pt;
 }
 
-.muworld{
+.muworld {
   text-align: center;
   font-size: 55pt;
   margin-bottom: 24px;
 }
 
-h2, h3{
+h2,
+h3 {
   text-align: center;
   margin-bottom: 24px;
 }
 
-form{
+form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
 }
 
-.form__container{
+.form__container {
   width: 100%;
   margin: 0 auto;
   max-width: 400px;
   padding: 0 16px;
 }
 
-input, select{
+input,
+select {
   margin: 8px 0;
   padding: 4px 4px;
   width: 100%;
 }
 
-.login{
+.login {
   width: 100%;
   max-width: 100px;
   height: 32px;
@@ -207,12 +213,14 @@ input, select{
   border-radius: 10%;
 }
 
-.reg__para, .reset__para, .alr__para{
+.reg__para,
+.reset__para,
+.alr__para {
   text-align: center;
   margin-top: 16px;
 }
 
-.staff{
+.staff {
   margin-bottom: 30px;
 }
 
@@ -220,11 +228,13 @@ input, select{
   DASHBOARD
 */
 
-#userName{
+#userName {
   color: maroon;
 }
 
-#dashboard, #heatmap{
+#dashboard,
+#heatmap,
+#find {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
@@ -234,7 +244,7 @@ input, select{
   align-items: center;
 }
 
-.dashboard__icons{
+.dashboard__icons {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -242,18 +252,18 @@ input, select{
   width: 100%;
 }
 
-.icon__link{
-  width: calc(100%/3);
+.icon__link {
+  width: calc(100% / 3);
   text-align: center;
   margin: 24px 0;
 }
 
-i{
+i {
   font-size: 200px;
   color: red;
 }
 
-.icon__name{
+.icon__name {
   color: black;
 }
 
@@ -261,16 +271,16 @@ i{
   HEATMAP
 */
 
-#heatmap{
+#heatmap {
   flex-direction: row;
 }
 
-.map__container{
+.map__container {
   width: 100%;
   max-width: 768px;
 }
 
-#map{
+#map {
   height: 508px;
   width: 100%;
 }
@@ -278,7 +288,7 @@ i{
 /*
   INDIVIDUAL INTERACTION
 */
-#indSubmissionForm{
+#indSubmissionForm {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -289,7 +299,7 @@ i{
   margin: 0 auto;
 }
 
-#indIntForm{
+#indIntForm {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -297,12 +307,14 @@ i{
   width: 100%;
 }
 
-.staff__details, .interaction__details, .organisation__details{
+.staff__details,
+.interaction__details,
+.organisation__details {
   padding: 0 16px;
-  width: calc(100%/3);
+  width: calc(100% / 3);
 }
 
-#indIntSubmit{
+#indIntSubmit {
   background-color: red;
   color: white;
   border-radius: 10px;
@@ -310,23 +322,24 @@ i{
   width: 100%;
   margin-top: 24px;
   font-weight: 700;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 /*
   ADMIN PANEL
 */
-#admin{
+
+#admin {
   width: 100%;
   max-width: 95%;
   margin: 0 auto;
 }
 
-#panel{
+#panel {
   margin-bottom: 16px;
 }
 
-.btn-primary{
+.btn-primary {
   color: aliceblue;
   background-color: blue;
   border: none;
@@ -334,7 +347,7 @@ i{
   padding: 8px 8px;
 }
 
-.btn-danger{
+.btn-danger {
   color: aliceblue;
   background-color: red;
   border: none;
@@ -342,201 +355,153 @@ i{
   padding: 8px 8px;
 }
 
-#unverifiedInteractionsTable{
+#unverifiedInteractionsTable {
   display: block;
   height: 700px;
-  overflow:scroll;
+  overflow: scroll;
   border: 10px solid #000;
   border-radius: 15px;
   background-color: antiquewhite;
 }
 
-#unverifiedInteractionsTable table{
-  width: 100%;
-  border-collapse: collapse;
-}
-
-td{
+td,
+th {
   width: 100%;
   white-space: nowrap;
 }
 
-#unverifiedInteractionsTable table tr{
-  border: 1px solid #000;
-}
-
-#unverifiedInteractionsTable table tr td{
+table, tr, td, th{
   border: 1px solid #000;
   padding: 5px;
-}
-
-/* Staff name */
-#unverifiedInteractionsTable table tr td:nth-child(1){
-  width: 10%;
-}
-
-/* Staff role */
-#unverifiedInteractionsTable table tr td:nth-child(2){
-  width: 10%;
-}
-
-/* Staff email */
-#unverifiedInteractionsTable table tr td:nth-child(3){
-  width: 10%;
-}
-
-/* Staff contact */
-#unverifiedInteractionsTable table tr td:nth-child(4){
-  width: 10%;
-}
-
-/* Staff department */
-#unverifiedInteractionsTable table tr td:nth-child(5){
-  width: 10%;
-}
-
-/* Visit date */
-#unverifiedInteractionsTable table tr td:nth-child(6){
-  width: 8%;
-}
-
-/* Visit purpose */
-#unverifiedInteractionsTable table tr td:nth-child(7){
-  width: 15%;
-}
-
-/* Completion status */
-#unverifiedInteractionsTable table tr td:nth-child(8){
-  width: 5%;
-}
-
-/* Organisation name */
-#unverifiedInteractionsTable table tr td:nth-child(9){
-  width: 10%;
-}
-
-/* Organisation address */
-#unverifiedInteractionsTable table tr td:nth-child(10){
-  width: 10%;
-}
-
-/* Organisation type */
-#unverifiedInteractionsTable table tr td:nth-child(11){
-  width: 5%;
-}
-
-/* Verfiy */
-#unverifiedInteractionsTable table tr td:nth-child(12){
-  width: 5%;
-}
-
-/* Reject */
-#unverifiedInteractionsTable table tr td:nth-child(13){
-  width: 5%;
 }
 
 .resultTable {
   display: block;
   height: 700px;
-  overflow:scroll;
+  overflow: scroll;
   border: 10px solid #000;
   border-radius: 15px;
   background-color: antiquewhite;
 }
 
-.resultTable table{
+table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.resultTable table tr{
+tr,
+td,
+th {
   border: 1px solid #000;
+  padding: 5px 5px;
 }
 
-.resultTable table tr td{
-  border: 1px solid #000;
+/*
+  FIND USER
+*/
+
+#search{
+  width: 100%;
+  max-width: 500px;
+}
+
+#searchForm{
+  padding-bottom: 16px;;
+}
+
+#searchButton{
+  border-radius: 8px;
   padding: 5px;
+  border: none;
+  background-color: red;
+  color: white;
+  font-weight: 700;
 }
 
 /*
   FOOTER
 */
 
-footer{
+footer {
   bottom: 0;
   background-color: black;
   height: 40px;
   margin-top: auto;
 }
 
-.footer__text{
-  color:white;
+.footer__text {
+  color: white;
   text-align: center;
   padding: 8px 0;
 }
 
-@media(max-width: 768px){
-  .nav__link--anchor, .logout{
+@media (max-width: 768px) {
+  .nav__link--anchor,
+  .logout {
     font-size: 12px;
   }
 
-  #heatmap{
+  #heatmap {
     flex-direction: column;
   }
 
-  h1{
+  h1 {
     font-size: 24px;
   }
 
-  i{
+  i {
     font-size: 150px;
   }
 }
 
-@media(max-width: 550px){
-  .welcome, .muworld{
+@media (max-width: 550px) {
+  .welcome,
+  .muworld {
     font-size: 48px;
   }
 
-  i{
+  i {
     font-size: 100px;
   }
 
-  .icon__link{
+  .icon__link {
     width: 50%;
   }
 
-  .icon__name{
+  .icon__name {
     font-size: 10px;
   }
 
-  .btn__menu{
+  .btn__menu {
     display: flex;
   }
 
-  .logout, .nav__link--list{
+  .logout,
+  .nav__link--list {
     display: none;
   }
 
-  h1{
+  h1 {
     font-size: 16px;
   }
 
-
-  #welcome__user{
+  #welcome__user {
     font-size: 25px;
   }
 
-  #userName{
+  #userName {
     font-size: 20px;
   }
 
-  .logout__d{
+  .logout__d {
     display: flex;
-  }  
+  }
 }
 
-/* MOU Page */
+/* 
+  MOU
+*/
+
 #drop-area {
   border: 2px dashed #ccc;
   border-radius: 20px;

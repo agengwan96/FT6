@@ -224,7 +224,7 @@ input, select{
   color: maroon;
 }
 
-#dashboard, #heatmap{
+#dashboard, #heatmap, #find{
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
@@ -348,92 +348,42 @@ i{
   overflow:scroll;
   border: 10px solid #000;
   border-radius: 15px;
-  background-color: antiquewhite; /* Change this color @ageng */
+  background-color: antiquewhite;
 }
 
-#unverifiedInteractionsTable table{
-  width: 100%;
-  border-collapse: collapse;
-}
-
-td{
+td, th{
   width: 100%;
   white-space: nowrap;
 }
 
-#unverifiedInteractionsTable table tr{
-  border: 1px solid #000;
-}
 
-#unverifiedInteractionsTable table tr td{
+#unverifiedInteractionsTable table tr td th{
   border: 1px solid #000;
   padding: 5px;
 }
 
-/* Staff name */
-#unverifiedInteractionsTable table tr td:nth-child(1){
-  width: 10%;
+.resultTable {
+  display: block;
+  height: 700px;
+  overflow:scroll;
+  border: 10px solid #000;
+  border-radius: 15px;
+  background-color: antiquewhite;
 }
 
-/* Staff role */
-#unverifiedInteractionsTable table tr td:nth-child(2){
-  width: 10%;
+table{
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Staff email */
-#unverifiedInteractionsTable table tr td:nth-child(3){
-  width: 10%;
+tr, td, th{
+  border: 1px solid #000;
+  padding: 5px 5px;
 }
 
-/* Staff contact */
-#unverifiedInteractionsTable table tr td:nth-child(4){
-  width: 10%;
-}
-
-/* Staff department */
-#unverifiedInteractionsTable table tr td:nth-child(5){
-  width: 10%;
-}
-
-/* Visit date */
-#unverifiedInteractionsTable table tr td:nth-child(6){
-  width: 8%;
-}
-
-/* Visit purpose */
-#unverifiedInteractionsTable table tr td:nth-child(7){
-  width: 15%;
-}
-
-/* Completion status */
-#unverifiedInteractionsTable table tr td:nth-child(8){
-  width: 5%;
-}
-
-/* Organisation name */
-#unverifiedInteractionsTable table tr td:nth-child(9){
-  width: 10%;
-}
-
-/* Organisation address */
-#unverifiedInteractionsTable table tr td:nth-child(10){
-  width: 10%;
-}
-
-/* Organisation type */
-#unverifiedInteractionsTable table tr td:nth-child(11){
-  width: 5%;
-}
-
-/* Verfiy */
-#unverifiedInteractionsTable table tr td:nth-child(12){
-  width: 5%;
-}
-
-/* Reject */
-#unverifiedInteractionsTable table tr td:nth-child(13){
-  width: 5%;
-}
+/*
+  FIND USER
+*/
 
 /*
   FOOTER
