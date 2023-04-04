@@ -88,12 +88,9 @@ function heatmap(l){
     heatmap.setMap(map);
 }
 
-geocode("Australia");
-geocode("Singapore");
-
 // fetches all countries from firebase and calls geocode function
 function fetchCountriesAndCallGeocode(){
-    const countryRef = collection(db, 'unverifiedInteractions');
+    const countryRef = collection(db, 'verifiedInteractions');
     const querySnapshot = getDocs(countryRef);
     querySnapshot.then((querySnapshot) => {
         querySnapshot.forEach((doc) => {

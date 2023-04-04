@@ -9,9 +9,6 @@
       src="https://kit.fontawesome.com/c8e4d183c2.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../scripts/app.js" defer></script>
-    <script type="module" src="../scripts/firebase_scripts.js" defer></script>
-    <script type="module" src="../scripts/modules.js" defer></script>    
     <link rel="stylesheet" type="text/css" href="../style.css" />
   </head>
   <body>
@@ -48,3 +45,91 @@
     </footer>
   </body>
 </html>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.17.2/storage.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+      apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
+      authDomain: "muworldv1-ft6.firebaseapp.com",
+      databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "muworldv1-ft6",
+      storageBucket: "muworldv1-ft6.appspot.com",
+      messagingSenderId: "659133217389",
+      appId: "1:659133217389:web:386e36e80f023670421d64",
+      measurementId: "G-BQJCVKPBJN"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  
+  // logout button
+  const logoutButton = document.getElementById("logoutButton");
+  logoutButton.addEventListener("click", () => {
+    auth.signOut();
+  });
+
+  // If user is not logged in, redirect to login page
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      window.location.href = "./login.html";
+    }
+  });
+
+  // Drag and drop
+  function handleFiles(files) {
+    ([...files]).forEach(uploadFile)
+  }
+
+  let dropArea = document.getElementById('drop-area')
+
+  ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, preventDefaults, false)
+  })
+
+  function preventDefaults (e) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  ;['dragenter', 'dragover'].forEach(eventName => {
+    dropArea.addEventListener(eventName, highlight, false)
+  })
+
+  ;['dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, unhighlight, false)
+  })
+
+  function highlight(e) {
+    dropArea.classList.add('highlight')
+  }
+
+  function unhighlight(e) {
+    dropArea.classList.remove('highlight')
+  }
+
+  dropArea.addEventListener('drop', handleDrop, false)
+
+  function handleDrop(e) {
+    let dt = e.dataTransfer
+    let files = dt.files
+
+    uploadFile(files)
+  }
+
+  function renameFile(file, newName) {
+    return new File([file], newName, {type: file.type})
+  }
+
+  async function uploadFile(file) {
+    const storageRef = ref(storage, `uploaded_files/${file.name}`);
+    const snapshot = await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    console.log(`Uploaded ${file.name}: ${downloadURL}`);
+  }
+
+</script>

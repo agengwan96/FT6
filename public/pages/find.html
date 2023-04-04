@@ -9,8 +9,6 @@
       src="https://kit.fontawesome.com/c8e4d183c2.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../scripts/app.js" defer></script>
-    <script type="module" src="../scripts/modules.js" defer></script>    
     <link rel="stylesheet" type="text/css" href="../style.css" />
   </head>
   <body>
@@ -34,8 +32,147 @@
     <section id="mou">
       <h1 class="sub__title"><span class="red">F</span>ind User</h1>
     </section>
+    <h3>Search up interactions by different users here</h3>
+    <div id="search">
+      <form id="searchForm">
+        <label for="searchInput">Search Name</label>
+        <input type="text" id="searchInput"/>
+        <button type="submit" id="searchButton">Search</button>
+      </form>
+    </div>
+    <div id="searchResults" class="resultTable">
+      <table id="searchResultsTableHeader">
+        <thead>
+          <tr>
+            <th>Staff Name</th>
+            <th>Staff Role</th>
+            <th>Staff Department</th>
+            <th>Staff Contact</th>
+            <th>Visit Date</th>
+            <th>Visit Purpose</th>
+            <th>Status</th>
+            <th>Org Name</th>
+            <th>Org Address</th>
+            <th>Org type</th>
+            <th id="dateSubmitted">Date Submitted</th>
+          </tr>
+        </thead>
+        <tbody id="searchResultsTableBody"></tbody>
+      </table>
+      <table id="searchResultsTable">
+      </table>
+    </div>
+    <div id="searchResultsTableBody"></div>
     <footer>
       <p class="footer__text">MuWorld Copyright &#169; 2023</p>
     </footer>
   </body>
 </html>
+
+<script type="module">
+  // Description: This file contains all the firebase scripts used in the website.
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+      apiKey: "AIzaSyBw1ySW4GfUqEeRtpBTYgCGeMSLC3ru4QU",
+      authDomain: "muworldv1-ft6.firebaseapp.com",
+      databaseURL: "https://muworldv1-ft6-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "muworldv1-ft6",
+      storageBucket: "muworldv1-ft6.appspot.com",
+      messagingSenderId: "659133217389",
+      appId: "1:659133217389:web:386e36e80f023670421d64",
+      measurementId: "G-BQJCVKPBJN"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const db = getFirestore(app);
+
+  // Log out the user.
+  const logoutButton = document.getElementById("logoutButton");
+  logoutButton.addEventListener("click", () => {
+      auth.signOut().then(() => {
+          window.location.href = "../index.html";
+      }).catch((error) => {
+          console.log(error);
+      });
+  });
+
+  // Variables used for the search function.
+  const searchForm = document.getElementById("searchForm");
+  const searchInput = document.getElementById("searchInput");
+  const searchButton = document.getElementById("searchButton");
+
+  // Normalizes the names so that it can be searched easily.
+  function normalizeName(name) {
+    return name.toLowerCase().replace(/\s+/g, '');
+  }
+  
+  // This function is used to fetch the verified interactions by name.
+  async function fetchVerifiedInteractionsByName(name) {
+    clearTable();
+
+    const verifiedInteractionsRef = collection(db, "verifiedInteractions");
+    const querySnapshot = await getDocs(verifiedInteractionsRef);
+
+    const tableBody = document.getElementById("searchResultsTable");
+
+    querySnapshot.forEach((doc) => {
+        const data = doc.data();
+
+        if (normalizeName(data.staffName) !== normalizeName(name)) {
+            return;
+        }
+
+        const row = document.createElement("tr");
+
+        const columns = [
+            data.staffName,
+            data.staffRole,
+            data.staffDepartment,
+            data.staffContact,
+            data.visitDate,
+            data.visitPurpose,
+            data.visitStatus,
+            data.orgName,
+            data.orgAddress,
+            data.orgType
+        ];
+
+        columns.forEach((value) => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+    });
+  }
+
+  searchButton.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const name = searchInput.value;
+
+      fetchVerifiedInteractionsByName(name);
+  });
+
+  // If the user is not logged in, redirect them to the login page.
+  auth.onAuthStateChanged((user) => {
+      if (!user) {
+          window.location.href = "../index.html";
+      }
+  });
+
+  function clearTable() {
+    const tableBody = document.getElementById("searchResultsTable");
+    while (tableBody.firstChild) {
+        tableBody.removeChild(tableBody.firstChild);
+    }
+}
+
+</script>

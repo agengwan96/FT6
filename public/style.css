@@ -348,7 +348,7 @@ i{
   overflow:scroll;
   border: 10px solid #000;
   border-radius: 15px;
-  background-color: antiquewhite; /* Change this color @ageng */
+  background-color: antiquewhite;
 }
 
 #unverifiedInteractionsTable table{
@@ -433,6 +433,29 @@ td{
 /* Reject */
 #unverifiedInteractionsTable table tr td:nth-child(13){
   width: 5%;
+}
+
+.resultTable {
+  display: block;
+  height: 700px;
+  overflow:scroll;
+  border: 10px solid #000;
+  border-radius: 15px;
+  background-color: antiquewhite;
+}
+
+.resultTable table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.resultTable table tr{
+  border: 1px solid #000;
+}
+
+.resultTable table tr td{
+  border: 1px solid #000;
+  padding: 5px;
 }
 
 /*
