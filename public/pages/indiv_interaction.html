@@ -9,6 +9,8 @@
       src="https://kit.fontawesome.com/c8e4d183c2.js"
       crossorigin="anonymous"
     ></script>
+    <script type="module" src="../scripts/modules.js"></script>
+    <script src="../scripts/mobile.js" defer></script>
     <script type="module" src="../scripts/firebase_scripts.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../style.css" />  </head>
   <body>
@@ -26,7 +28,13 @@
             <a href="./mou.html" class="nav__link--anchor">MOU</a>
           </li>
           <li class="nav__link">
-            <a href="./admin.html" class="nav__link--anchor">Admin Panel</a>
+            <a href="./find.html" class="nav__link--anchor">Find User</a>
+          </li>
+          <li class="nav__link">
+            <a href="./status.html" class="nav__link--anchor">Status</a>
+          </li>
+          <li class="nav__link">
+            <a href="./admin.html" class="nav__link--anchor" id="adminPanelLock">Admin Panel</a>
           </li>
         </ul>
         <button class="logout" id="logoutButton">Log Out</button>
@@ -39,16 +47,25 @@
           </button>
           <ul class="menu__links">
             <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./dashboard.html">Dashboard</a>
+            </li>
+            <li class="menu__list">
               <a onclick="closeMenu()" class="menu__link" href="./heatmap.html">Heatmap</a>
             </li>
             <li class="menu__list">
-              <a onclick="closeMenu()" class="menu__link" href="./indiv_interaction.html">Ind. Interaction</a>
+              <a onclick="closeMenu()" class="menu__link" href="./mou.html">MOU</a>
             </li>
             <li class="menu__list">
-              <a class="menu__link" href="./mou.html">MOU</a>
+              <a onclick="closeMenu()" class="menu__link" href="./find.html">Find User</a>
             </li>
             <li class="menu__list">
-              <button class="logout" id="logoutButton">Log Out</button>>
+              <a onclick="closeMenu()" class="menu__link" href="./status.html">Status</a>
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./admin.html" id="adminPanelLock">Admin Panel</a>
+            </li>
+            <li class="menu__list">
+              <button class="logout--mobile" id="logoutButton">Log Out</button>>
             </li>
           </ul>
         </div>

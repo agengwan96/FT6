@@ -1,6 +1,24 @@
 // Description: This file contains all the firebase scripts used in the website.
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+/* 
+    Mobile menu functions 
+*/
+console.log("app.js loaded");
+function openMenu(){
+    document.body.classList += " menu--open";
+    console.log("success");
+}
+
+function hi(){
+    console.log("hi");
+}
+hi();
+
+function closeMenu(){
+    document.body.classList.remove('menu--open');
+}
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -33,17 +51,6 @@ let locations = {
 /*array that wil contain locations object*/
 let heatArr = [];
 
-/* 
-    Mobile menu functions 
-*/
-function openMenu(){
-    document.body.classList += " menu--open";
-    console.log("success");
-}
-
-function closeMenu(){
-    document.body.classList.remove('menu--open');
-}
 
 /*
     Google Maps API

@@ -9,6 +9,7 @@
       src="https://kit.fontawesome.com/c8e4d183c2.js"
       crossorigin="anonymous"
     ></script>
+    <script src="../scripts/mobile.js"></script>
     <script type="module" src="../scripts/app.js" defer></script>
     <link rel="stylesheet" type="text/css" href="../style.css" />
     <script
@@ -35,11 +36,48 @@
             <a href="./mou.html" class="nav__link--anchor">MOU</a>
           </li>
           <li class="nav__link">
-            <a href="./admin.html" class="nav__link--anchor"
+            <a href="./find.html" class="nav__link--anchor">Find User</a>
+          </li>
+          <li class="nav__link">
+            <a href="./status.html" class="nav__link--anchor">Status</a>
+          </li>
+          <li class="nav__link">
+            <a href="./admin.html" class="nav__link--anchor" id="adminPanelLock"
               >Admin Panel</a
             >
         </ul>
         <button class="logout" id="logoutButton">Log Out</button>
+        <button onclick="openMenu()" class="btn__menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu__backdrop">
+          <button onclick="closeMenu()" class="btn__menu btn__menu--close">
+            <i class="fas fa-times"></i>
+          </button>
+          <ul class="menu__links">
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./dashboard.html">Dashboard</a>
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./indiv_interaction.html">Ind. Interaction</a>
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./mou.html">MOU</a>
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./status.html">Status</a>
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./find.html">Find User</a>
+            </li>
+            <li class="menu__list">
+              <a onclick="closeMenu()" class="menu__link" href="./admin.html" id="adminPanelLock">Admin Panel</a>
+            </li>
+            <li class="menu__list">
+              <button class="logout--mobile" id="logoutButton">Log Out</button>>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
     <section id="heatmap">
