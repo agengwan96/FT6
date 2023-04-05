@@ -69,12 +69,14 @@
     </nav>
     <section id="mou">
       <h1 class="sub__title"><span class="red">M</span>OU</h1>
+      <h3>Submit your MOUs here</h3>
     </section>
     <div id="drop-area">
       <form class="my-form">
         <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
         <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
         <label class="button" for="fileElem">Select some files</label>
+        <button id="upload-button">Submit MOU</button>
       </form>
     </div>
     
@@ -87,7 +89,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
   import { getAuth } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.17.2/storage.js";
+  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -104,6 +106,7 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
+  const storage = getStorage(app);
   
   // logout button
   const logoutButton = document.getElementById("logoutButton");
@@ -153,14 +156,19 @@
   dropArea.addEventListener('drop', handleDrop, false)
 
   function handleDrop(e) {
-    let dt = e.dataTransfer
-    let files = dt.files
+    const fileInput = document.querySelector("#file-input");
+    const files = Array.from(fileInput.files).map(renameFile);
 
-    uploadFile(files)
+    for (let i = 0; i < files.length; i++) {
+      var file = e.target.files[0];
+      var storageRef = firebase.storage().ref('img/'+file.name);
+      var task = storageRef.put(file);
+    }
   }
 
-  function renameFile(file, newName) {
-    return new File([file], newName, {type: file.type})
+  function renameFile(file, index) {
+    const extension = file.name.split('.').pop();
+    return new File([file], `file${index + 1}.${extension}`, { type: file.type });
   }
 
   async function uploadFile(file) {

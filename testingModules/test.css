@@ -1,9 +1,0 @@
-*{
-    align-items: center;
-    background-color: bisque;
-}
-
-#mainForm {
-    display: flex;
-    flex-direction: column;
-}
