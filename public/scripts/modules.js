@@ -1,6 +1,6 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification, updateProfile, sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
 // Your web app's Firebase configuration
@@ -54,75 +54,45 @@ if (document.getElementById('loginButton') != null) {
 
 /* Sign up user */
 if (document.getElementById('registerSubmitButton') != null) {
-  document.getElementById('registerSubmitButton').addEventListener('click', (e) => {
-    /* Pauses everything */
+  document.getElementById('registerSubmitButton').addEventListener('click', async (e) => {
     e.preventDefault();
 
-    /* Gets var that we need */
     const emailVar = document.getElementById('emailRegisterField').value;
     const passwordVar = document.getElementById('passwordRegisterField').value;
     const usernameVar = document.getElementById('usernameRegisterField').value;
 
-    /* Regex for checking if its a school domain */
-    var mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
-    var mailformat2 = /^\w+([\.-]?\w+)*@student.murdoch.edu.au+$/;
+    const mailformat = /^\w+([\.-]?\w+)*@murdoch.edu.au+$/;
+    const mailformat2 = /^\w+([\.-]?\w+)*@student.murdoch.edu.au+$/;
 
-    /* Checks for empty fields */
-    if (emailVar === '' || passwordVar === '' ||
-    emailVar === null || passwordVar === null) {
-          alert('Please enter required fields!');
-          return true;
-        }
-
-    /* Validates email to be an @murdoch.edu.au domain using regex */
-    if (!emailVar.match(mailformat) && !emailVar.match(mailformat2)) {
-      alert('Invalid email address! Please enter a @murdoch.edu.au or @student.murdoch.edu.au domain email');
-      emailVar.focus();
-      return true;  // Returns if its a invalid domain
+    if (!emailVar || !passwordVar) {
+      alert('Please enter required fields!');
+      return;
     }
 
-    /* If domain is correct, create user */
-    createUserWithEmailAndPassword(auth, emailVar, passwordVar)
-    .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
+    if (!emailVar.match(mailformat) && !emailVar.match(mailformat2)) {
+      alert('Invalid email address! Please enter a @murdoch.edu.au or @student.murdoch.edu.au domain email');
+      return;
+    }
 
-        // Update user profile
-        updateProfile(user, {
-          displayName: usernameVar
-        });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, emailVar, passwordVar);
+      const user = userCredential.user;
+      await updateProfile(user, { displayName: usernameVar });
+      
+      await set(ref(database, 'users/' + user.uid), {
+        username: usernameVar,
+        email: emailVar,
+        password: passwordVar,
+        role: 'staff'
+      });
 
-        // Creating user info in real time database
-        set(ref(database, 'users/' + user.uid), {
-          username: usernameVar,
-          email: emailVar,
-          password: passwordVar,
-          role: 'staff'
-        })
-        .then(() => {
-          // Data saved successfully!
-          alert('User created successfully');
-        })
-        .catch((error) => {
-          // Write failed
-          alert(error);
-        });
-        alert('successfully created acc');
-
-        /* // Send email verification (doesnt work on mudoch domain, may take out later)
-        sendEmailVerification(user)
-        .then(() => {
-            // Email verification sent!
-            let msg = 'An email verification link has been sent to ' + user.email;
-            alert(msg);
-        }); */
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-        alert(errorMessage);
-    });
+      alert('User created successfully');
+      
+      // Redirect to the login screen
+      window.location.href = '../index.html';
+    } catch (error) {
+      alert(error.message);
+    }
   });
 }
 
@@ -195,57 +165,4 @@ if (document.getElementById('logoutButton') != null) {
       alert('Logout Failed');
     });
   });
-}
-
-// MOU Upload
-if (document.getElementById('mouUploadButton') != null) {
-  let dropArea = document.getElementById('drop-area');
-
-  ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, preventDefaults, false)
-  })
-
-  function preventDefaults (e) {
-    e.preventDefault()
-    e.stopPropagation()
-  }
-
-  ;['dragenter', 'dragover'].forEach(eventName => {
-    dropArea.addEventListener(eventName, highlight, false)
-  })
-
-  ;['dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, unhighlight, false)
-  })
-
-  function highlight(e) {
-    dropArea.classList.add('highlight')
-  }
-
-  function unhighlight(e) {
-    dropArea.classList.remove('highlight')
-  }
-
-  dropArea.addEventListener('drop', handleDrop, false)
-
-  function handleDrop(e) {
-    let dt = e.dataTransfer
-    let files = dt.files
-
-    handleFiles(files)
-  }
-
-  function uploadFile(file) {
-    let url = 'YOUR URL HERE'
-    let formData = new FormData()
-
-    formData.append('file', file)
-
-    fetch(url, {
-      method: 'POST',
-      body: formData
-    })
-    .then(() => { /* Done. Inform the user */ })
-    .catch(() => { /* Error. Inform the user */ })
-  }
 }

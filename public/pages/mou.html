@@ -29,9 +29,6 @@
           <li class="nav__link">
             <a href="./status.html" class="nav__link--anchor">Status</a>
           </li>
-          <li class="nav__link">
-            <a href="./admin.html" class="nav__link--anchor" id="adminPanelLock">Admin Panel</a>
-          </li>
         </ul>
         <button class="logout" id="logoutButton">Log Out</button>
         <button onclick="openMenu()" class="btn__menu">
@@ -58,9 +55,6 @@
               <a onclick="closeMenu()" class="menu__link" href="./status.html">Status</a>
             </li>
             <li class="menu__list">
-              <a onclick="closeMenu()" class="menu__link" href="./admin.html" id="adminPanelLock">Admin Panel</a>
-            </li>
-            <li class="menu__list">
               <button class="logout--mobile" id="logoutButton">Log Out</button>>
             </li>
           </ul>
@@ -73,10 +67,10 @@
     </section>
     <div id="drop-area">
       <form class="my-form">
-        <p>Upload multiple files with the file dialog or by dragging and dropping images onto the dashed region</p>
-        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
-        <label class="button" for="fileElem">Select some files</label>
-        <button id="upload-button">Submit MOU</button>
+        <p>Drag and drop your documents here ( PDF format only please )</p>
+        <input type="file" id="fileElem" multiple accept="application/pdf">
+        <label class="button" for="fileElem">Select files</label>
+        <button type="button" id="upload-button">Submit MOU</button>
       </form>
     </div>
     
@@ -117,65 +111,43 @@
   // If user is not logged in, redirect to login page
   auth.onAuthStateChanged((user) => {
     if (!user) {
-      window.location.href = "./login.html";
+      window.location.href = "../index.html";
     }
   });
 
   // Drag and drop
+  const dropArea = document.getElementById("drop-area");
+  const fileElem = document.getElementById("fileElem");
+  const uploadButton = document.getElementById("upload-button");
+
+  dropArea.addEventListener("dragover", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.dataTransfer.dropEffect = "copy";
+  });
+
+  dropArea.addEventListener("drop", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    fileElem.files = event.dataTransfer.files;
+    handleFiles(fileElem.files);
+  });
+
+  fileElem.addEventListener("change", () => {
+    handleFiles(fileElem.files);
+  });
+
   function handleFiles(files) {
-    ([...files]).forEach(uploadFile)
+    // You can implement a preview or file validation here
   }
 
-  let dropArea = document.getElementById('drop-area')
-
-  ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, preventDefaults, false)
-  })
-
-  function preventDefaults (e) {
-    e.preventDefault()
-    e.stopPropagation()
-  }
-
-  ;['dragenter', 'dragover'].forEach(eventName => {
-    dropArea.addEventListener(eventName, highlight, false)
-  })
-
-  ;['dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, unhighlight, false)
-  })
-
-  function highlight(e) {
-    dropArea.classList.add('highlight')
-  }
-
-  function unhighlight(e) {
-    dropArea.classList.remove('highlight')
-  }
-
-  dropArea.addEventListener('drop', handleDrop, false)
-
-  function handleDrop(e) {
-    const fileInput = document.querySelector("#file-input");
-    const files = Array.from(fileInput.files).map(renameFile);
-
-    for (let i = 0; i < files.length; i++) {
-      var file = e.target.files[0];
-      var storageRef = firebase.storage().ref('img/'+file.name);
-      var task = storageRef.put(file);
-    }
-  }
-
-  function renameFile(file, index) {
-    const extension = file.name.split('.').pop();
-    return new File([file], `file${index + 1}.${extension}`, { type: file.type });
-  }
-
-  async function uploadFile(file) {
-    const storageRef = ref(storage, `uploaded_files/${file.name}`);
-    const snapshot = await uploadBytes(storageRef, file);
-    const downloadURL = await getDownloadURL(snapshot.ref);
-    console.log(`Uploaded ${file.name}: ${downloadURL}`);
-  }
+  uploadButton.addEventListener("click", () => {
+    Array.from(fileElem.files).forEach(file => {
+      const storageRef = storage.ref().child(`uploads/${file.name}`);
+      storageRef.put(file).then(snapshot => {
+        console.log(`File ${file.name} uploaded.`);
+      });
+    });
+  });
 
 </script>
